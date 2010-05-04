@@ -1,0 +1,66 @@
+package dk.au.perpos.tailing;
+//option cc_abstract_services = false;
+//option java_abstract_services = false;
+//option py_abstract_services = false;
+
+message Login
+{
+	enum Type
+	{
+		Agent  = 0;
+		Manager = 1;
+	}
+	required string name = 1;
+	required Type clientType = 2;
+}
+
+message Reply
+{
+	enum Answer
+	{
+		Ok = 0;
+		NotOk = 1;
+	}
+	required Answer theAnswer = 1;
+	optional string text = 2;
+}
+
+message Position
+{
+	required double longitude = 1;
+	required double latitude = 2;
+	optional double altitude = 3;
+}
+
+message Person
+{
+	required Position pos = 1;
+	required double direction = 2;
+	required double speed = 3;
+}
+
+message Agent
+{
+	required string name = 1;
+	required Person per = 2;
+}
+
+message Target
+{
+	required Person per = 1;
+}
+
+message MapRequest
+{
+	required Position upperLeft = 1;
+	required Position lowerRight = 2;
+}
+
+message MapReply
+{
+	required bytes data = 1;
+}
+
+service TestService {
+  rpc Test (Login) returns (Reply);
+}
