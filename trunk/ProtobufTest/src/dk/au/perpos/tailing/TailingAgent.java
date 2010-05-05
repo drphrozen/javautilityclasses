@@ -324,6 +324,7 @@ public final class TailingAgent {
         implements com.google.protobuf.ProtocolMessageEnum {
       Agent(0, 0),
       Manager(1, 1),
+      AgentCallback(2, 2),
       ;
       
       
@@ -333,6 +334,7 @@ public final class TailingAgent {
         switch (value) {
           case 0: return Agent;
           case 1: return Manager;
+          case 2: return AgentCallback;
           default: return null;
         }
       }
@@ -363,7 +365,7 @@ public final class TailingAgent {
       }
       
       private static final Type[] VALUES = {
-        Agent, Manager, 
+        Agent, Manager, AgentCallback, 
       };
       public static Type valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -792,12 +794,12 @@ public final class TailingAgent {
       // @@protoc_insertion_point(enum_scope:dk.au.perpos.tailing.Reply.Answer)
     }
     
-    // required .dk.au.perpos.tailing.Reply.Answer theAnswer = 1;
-    public static final int THEANSWER_FIELD_NUMBER = 1;
-    private boolean hasTheAnswer;
-    private dk.au.perpos.tailing.TailingAgent.Reply.Answer theAnswer_;
-    public boolean hasTheAnswer() { return hasTheAnswer; }
-    public dk.au.perpos.tailing.TailingAgent.Reply.Answer getTheAnswer() { return theAnswer_; }
+    // required .dk.au.perpos.tailing.Reply.Answer answer = 1;
+    public static final int ANSWER_FIELD_NUMBER = 1;
+    private boolean hasAnswer;
+    private dk.au.perpos.tailing.TailingAgent.Reply.Answer answer_;
+    public boolean hasAnswer() { return hasAnswer; }
+    public dk.au.perpos.tailing.TailingAgent.Reply.Answer getAnswer() { return answer_; }
     
     // optional string text = 2;
     public static final int TEXT_FIELD_NUMBER = 2;
@@ -807,18 +809,18 @@ public final class TailingAgent {
     public java.lang.String getText() { return text_; }
     
     private void initFields() {
-      theAnswer_ = dk.au.perpos.tailing.TailingAgent.Reply.Answer.Ok;
+      answer_ = dk.au.perpos.tailing.TailingAgent.Reply.Answer.Ok;
     }
     public final boolean isInitialized() {
-      if (!hasTheAnswer) return false;
+      if (!hasAnswer) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasTheAnswer()) {
-        output.writeEnum(1, getTheAnswer().getNumber());
+      if (hasAnswer()) {
+        output.writeEnum(1, getAnswer().getNumber());
       }
       if (hasText()) {
         output.writeString(2, getText());
@@ -832,9 +834,9 @@ public final class TailingAgent {
       if (size != -1) return size;
     
       size = 0;
-      if (hasTheAnswer()) {
+      if (hasAnswer()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, getTheAnswer().getNumber());
+          .computeEnumSize(1, getAnswer().getNumber());
       }
       if (hasText()) {
         size += com.google.protobuf.CodedOutputStream
@@ -998,8 +1000,8 @@ public final class TailingAgent {
       
       public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.Reply other) {
         if (other == dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance()) return this;
-        if (other.hasTheAnswer()) {
-          setTheAnswer(other.getTheAnswer());
+        if (other.hasAnswer()) {
+          setAnswer(other.getAnswer());
         }
         if (other.hasText()) {
           setText(other.getText());
@@ -1035,7 +1037,7 @@ public final class TailingAgent {
               if (value == null) {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
-                setTheAnswer(value);
+                setAnswer(value);
               }
               break;
             }
@@ -1048,24 +1050,24 @@ public final class TailingAgent {
       }
       
       
-      // required .dk.au.perpos.tailing.Reply.Answer theAnswer = 1;
-      public boolean hasTheAnswer() {
-        return result.hasTheAnswer();
+      // required .dk.au.perpos.tailing.Reply.Answer answer = 1;
+      public boolean hasAnswer() {
+        return result.hasAnswer();
       }
-      public dk.au.perpos.tailing.TailingAgent.Reply.Answer getTheAnswer() {
-        return result.getTheAnswer();
+      public dk.au.perpos.tailing.TailingAgent.Reply.Answer getAnswer() {
+        return result.getAnswer();
       }
-      public Builder setTheAnswer(dk.au.perpos.tailing.TailingAgent.Reply.Answer value) {
+      public Builder setAnswer(dk.au.perpos.tailing.TailingAgent.Reply.Answer value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasTheAnswer = true;
-        result.theAnswer_ = value;
+        result.hasAnswer = true;
+        result.answer_ = value;
         return this;
       }
-      public Builder clearTheAnswer() {
-        result.hasTheAnswer = false;
-        result.theAnswer_ = dk.au.perpos.tailing.TailingAgent.Reply.Answer.Ok;
+      public Builder clearAnswer() {
+        result.hasAnswer = false;
+        result.answer_ = dk.au.perpos.tailing.TailingAgent.Reply.Answer.Ok;
         return this;
       }
       
@@ -1493,12 +1495,12 @@ public final class TailingAgent {
       return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_Person_fieldAccessorTable;
     }
     
-    // required .dk.au.perpos.tailing.Position pos = 1;
-    public static final int POS_FIELD_NUMBER = 1;
-    private boolean hasPos;
-    private dk.au.perpos.tailing.TailingAgent.Position pos_;
-    public boolean hasPos() { return hasPos; }
-    public dk.au.perpos.tailing.TailingAgent.Position getPos() { return pos_; }
+    // required .dk.au.perpos.tailing.Position position = 1;
+    public static final int POSITION_FIELD_NUMBER = 1;
+    private boolean hasPosition;
+    private dk.au.perpos.tailing.TailingAgent.Position position_;
+    public boolean hasPosition() { return hasPosition; }
+    public dk.au.perpos.tailing.TailingAgent.Position getPosition() { return position_; }
     
     // required double direction = 2;
     public static final int DIRECTION_FIELD_NUMBER = 2;
@@ -1515,21 +1517,21 @@ public final class TailingAgent {
     public double getSpeed() { return speed_; }
     
     private void initFields() {
-      pos_ = dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance();
+      position_ = dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance();
     }
     public final boolean isInitialized() {
-      if (!hasPos) return false;
+      if (!hasPosition) return false;
       if (!hasDirection) return false;
       if (!hasSpeed) return false;
-      if (!getPos().isInitialized()) return false;
+      if (!getPosition().isInitialized()) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasPos()) {
-        output.writeMessage(1, getPos());
+      if (hasPosition()) {
+        output.writeMessage(1, getPosition());
       }
       if (hasDirection()) {
         output.writeDouble(2, getDirection());
@@ -1546,9 +1548,9 @@ public final class TailingAgent {
       if (size != -1) return size;
     
       size = 0;
-      if (hasPos()) {
+      if (hasPosition()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPos());
+          .computeMessageSize(1, getPosition());
       }
       if (hasDirection()) {
         size += com.google.protobuf.CodedOutputStream
@@ -1716,8 +1718,8 @@ public final class TailingAgent {
       
       public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.Person other) {
         if (other == dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) return this;
-        if (other.hasPos()) {
-          mergePos(other.getPos());
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
         }
         if (other.hasDirection()) {
           setDirection(other.getDirection());
@@ -1752,11 +1754,11 @@ public final class TailingAgent {
             }
             case 10: {
               dk.au.perpos.tailing.TailingAgent.Position.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Position.newBuilder();
-              if (hasPos()) {
-                subBuilder.mergeFrom(getPos());
+              if (hasPosition()) {
+                subBuilder.mergeFrom(getPosition());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setPos(subBuilder.buildPartial());
+              setPosition(subBuilder.buildPartial());
               break;
             }
             case 17: {
@@ -1772,40 +1774,40 @@ public final class TailingAgent {
       }
       
       
-      // required .dk.au.perpos.tailing.Position pos = 1;
-      public boolean hasPos() {
-        return result.hasPos();
+      // required .dk.au.perpos.tailing.Position position = 1;
+      public boolean hasPosition() {
+        return result.hasPosition();
       }
-      public dk.au.perpos.tailing.TailingAgent.Position getPos() {
-        return result.getPos();
+      public dk.au.perpos.tailing.TailingAgent.Position getPosition() {
+        return result.getPosition();
       }
-      public Builder setPos(dk.au.perpos.tailing.TailingAgent.Position value) {
+      public Builder setPosition(dk.au.perpos.tailing.TailingAgent.Position value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasPos = true;
-        result.pos_ = value;
+        result.hasPosition = true;
+        result.position_ = value;
         return this;
       }
-      public Builder setPos(dk.au.perpos.tailing.TailingAgent.Position.Builder builderForValue) {
-        result.hasPos = true;
-        result.pos_ = builderForValue.build();
+      public Builder setPosition(dk.au.perpos.tailing.TailingAgent.Position.Builder builderForValue) {
+        result.hasPosition = true;
+        result.position_ = builderForValue.build();
         return this;
       }
-      public Builder mergePos(dk.au.perpos.tailing.TailingAgent.Position value) {
-        if (result.hasPos() &&
-            result.pos_ != dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance()) {
-          result.pos_ =
-            dk.au.perpos.tailing.TailingAgent.Position.newBuilder(result.pos_).mergeFrom(value).buildPartial();
+      public Builder mergePosition(dk.au.perpos.tailing.TailingAgent.Position value) {
+        if (result.hasPosition() &&
+            result.position_ != dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance()) {
+          result.position_ =
+            dk.au.perpos.tailing.TailingAgent.Position.newBuilder(result.position_).mergeFrom(value).buildPartial();
         } else {
-          result.pos_ = value;
+          result.position_ = value;
         }
-        result.hasPos = true;
+        result.hasPosition = true;
         return this;
       }
-      public Builder clearPos() {
-        result.hasPos = false;
-        result.pos_ = dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance();
+      public Builder clearPosition() {
+        result.hasPosition = false;
+        result.position_ = dk.au.perpos.tailing.TailingAgent.Position.getDefaultInstance();
         return this;
       }
       
@@ -1891,20 +1893,20 @@ public final class TailingAgent {
     public boolean hasName() { return hasName; }
     public java.lang.String getName() { return name_; }
     
-    // required .dk.au.perpos.tailing.Person per = 2;
-    public static final int PER_FIELD_NUMBER = 2;
-    private boolean hasPer;
-    private dk.au.perpos.tailing.TailingAgent.Person per_;
-    public boolean hasPer() { return hasPer; }
-    public dk.au.perpos.tailing.TailingAgent.Person getPer() { return per_; }
+    // required .dk.au.perpos.tailing.Person person = 2;
+    public static final int PERSON_FIELD_NUMBER = 2;
+    private boolean hasPerson;
+    private dk.au.perpos.tailing.TailingAgent.Person person_;
+    public boolean hasPerson() { return hasPerson; }
+    public dk.au.perpos.tailing.TailingAgent.Person getPerson() { return person_; }
     
     private void initFields() {
-      per_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+      person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasName) return false;
-      if (!hasPer) return false;
-      if (!getPer().isInitialized()) return false;
+      if (!hasPerson) return false;
+      if (!getPerson().isInitialized()) return false;
       return true;
     }
     
@@ -1914,8 +1916,8 @@ public final class TailingAgent {
       if (hasName()) {
         output.writeString(1, getName());
       }
-      if (hasPer()) {
-        output.writeMessage(2, getPer());
+      if (hasPerson()) {
+        output.writeMessage(2, getPerson());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1930,9 +1932,9 @@ public final class TailingAgent {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(1, getName());
       }
-      if (hasPer()) {
+      if (hasPerson()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getPer());
+          .computeMessageSize(2, getPerson());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2095,8 +2097,8 @@ public final class TailingAgent {
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasPer()) {
-          mergePer(other.getPer());
+        if (other.hasPerson()) {
+          mergePerson(other.getPerson());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2129,11 +2131,11 @@ public final class TailingAgent {
             }
             case 18: {
               dk.au.perpos.tailing.TailingAgent.Person.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Person.newBuilder();
-              if (hasPer()) {
-                subBuilder.mergeFrom(getPer());
+              if (hasPerson()) {
+                subBuilder.mergeFrom(getPerson());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setPer(subBuilder.buildPartial());
+              setPerson(subBuilder.buildPartial());
               break;
             }
           }
@@ -2162,40 +2164,40 @@ public final class TailingAgent {
         return this;
       }
       
-      // required .dk.au.perpos.tailing.Person per = 2;
-      public boolean hasPer() {
-        return result.hasPer();
+      // required .dk.au.perpos.tailing.Person person = 2;
+      public boolean hasPerson() {
+        return result.hasPerson();
       }
-      public dk.au.perpos.tailing.TailingAgent.Person getPer() {
-        return result.getPer();
+      public dk.au.perpos.tailing.TailingAgent.Person getPerson() {
+        return result.getPerson();
       }
-      public Builder setPer(dk.au.perpos.tailing.TailingAgent.Person value) {
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasPer = true;
-        result.per_ = value;
+        result.hasPerson = true;
+        result.person_ = value;
         return this;
       }
-      public Builder setPer(dk.au.perpos.tailing.TailingAgent.Person.Builder builderForValue) {
-        result.hasPer = true;
-        result.per_ = builderForValue.build();
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person.Builder builderForValue) {
+        result.hasPerson = true;
+        result.person_ = builderForValue.build();
         return this;
       }
-      public Builder mergePer(dk.au.perpos.tailing.TailingAgent.Person value) {
-        if (result.hasPer() &&
-            result.per_ != dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) {
-          result.per_ =
-            dk.au.perpos.tailing.TailingAgent.Person.newBuilder(result.per_).mergeFrom(value).buildPartial();
+      public Builder mergePerson(dk.au.perpos.tailing.TailingAgent.Person value) {
+        if (result.hasPerson() &&
+            result.person_ != dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) {
+          result.person_ =
+            dk.au.perpos.tailing.TailingAgent.Person.newBuilder(result.person_).mergeFrom(value).buildPartial();
         } else {
-          result.per_ = value;
+          result.person_ = value;
         }
-        result.hasPer = true;
+        result.hasPerson = true;
         return this;
       }
-      public Builder clearPer() {
-        result.hasPer = false;
-        result.per_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+      public Builder clearPerson() {
+        result.hasPerson = false;
+        result.person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
         return this;
       }
       
@@ -2238,27 +2240,27 @@ public final class TailingAgent {
       return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_Target_fieldAccessorTable;
     }
     
-    // required .dk.au.perpos.tailing.Person per = 1;
-    public static final int PER_FIELD_NUMBER = 1;
-    private boolean hasPer;
-    private dk.au.perpos.tailing.TailingAgent.Person per_;
-    public boolean hasPer() { return hasPer; }
-    public dk.au.perpos.tailing.TailingAgent.Person getPer() { return per_; }
+    // required .dk.au.perpos.tailing.Person person = 1;
+    public static final int PERSON_FIELD_NUMBER = 1;
+    private boolean hasPerson;
+    private dk.au.perpos.tailing.TailingAgent.Person person_;
+    public boolean hasPerson() { return hasPerson; }
+    public dk.au.perpos.tailing.TailingAgent.Person getPerson() { return person_; }
     
     private void initFields() {
-      per_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+      person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
     }
     public final boolean isInitialized() {
-      if (!hasPer) return false;
-      if (!getPer().isInitialized()) return false;
+      if (!hasPerson) return false;
+      if (!getPerson().isInitialized()) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasPer()) {
-        output.writeMessage(1, getPer());
+      if (hasPerson()) {
+        output.writeMessage(1, getPerson());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2269,9 +2271,9 @@ public final class TailingAgent {
       if (size != -1) return size;
     
       size = 0;
-      if (hasPer()) {
+      if (hasPerson()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPer());
+          .computeMessageSize(1, getPerson());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2431,8 +2433,8 @@ public final class TailingAgent {
       
       public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.Target other) {
         if (other == dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance()) return this;
-        if (other.hasPer()) {
-          mergePer(other.getPer());
+        if (other.hasPerson()) {
+          mergePerson(other.getPerson());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2461,11 +2463,11 @@ public final class TailingAgent {
             }
             case 10: {
               dk.au.perpos.tailing.TailingAgent.Person.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Person.newBuilder();
-              if (hasPer()) {
-                subBuilder.mergeFrom(getPer());
+              if (hasPerson()) {
+                subBuilder.mergeFrom(getPerson());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setPer(subBuilder.buildPartial());
+              setPerson(subBuilder.buildPartial());
               break;
             }
           }
@@ -2473,40 +2475,40 @@ public final class TailingAgent {
       }
       
       
-      // required .dk.au.perpos.tailing.Person per = 1;
-      public boolean hasPer() {
-        return result.hasPer();
+      // required .dk.au.perpos.tailing.Person person = 1;
+      public boolean hasPerson() {
+        return result.hasPerson();
       }
-      public dk.au.perpos.tailing.TailingAgent.Person getPer() {
-        return result.getPer();
+      public dk.au.perpos.tailing.TailingAgent.Person getPerson() {
+        return result.getPerson();
       }
-      public Builder setPer(dk.au.perpos.tailing.TailingAgent.Person value) {
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasPer = true;
-        result.per_ = value;
+        result.hasPerson = true;
+        result.person_ = value;
         return this;
       }
-      public Builder setPer(dk.au.perpos.tailing.TailingAgent.Person.Builder builderForValue) {
-        result.hasPer = true;
-        result.per_ = builderForValue.build();
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person.Builder builderForValue) {
+        result.hasPerson = true;
+        result.person_ = builderForValue.build();
         return this;
       }
-      public Builder mergePer(dk.au.perpos.tailing.TailingAgent.Person value) {
-        if (result.hasPer() &&
-            result.per_ != dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) {
-          result.per_ =
-            dk.au.perpos.tailing.TailingAgent.Person.newBuilder(result.per_).mergeFrom(value).buildPartial();
+      public Builder mergePerson(dk.au.perpos.tailing.TailingAgent.Person value) {
+        if (result.hasPerson() &&
+            result.person_ != dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) {
+          result.person_ =
+            dk.au.perpos.tailing.TailingAgent.Person.newBuilder(result.person_).mergeFrom(value).buildPartial();
         } else {
-          result.per_ = value;
+          result.person_ = value;
         }
-        result.hasPer = true;
+        result.hasPerson = true;
         return this;
       }
-      public Builder clearPer() {
-        result.hasPer = false;
-        result.per_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+      public Builder clearPerson() {
+        result.hasPerson = false;
+        result.person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
         return this;
       }
       
@@ -2522,31 +2524,31 @@ public final class TailingAgent {
     // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.Target)
   }
   
-  public static final class MapRequest extends
+  public static final class MapArea extends
       com.google.protobuf.GeneratedMessage {
-    // Use MapRequest.newBuilder() to construct.
-    private MapRequest() {
+    // Use MapArea.newBuilder() to construct.
+    private MapArea() {
       initFields();
     }
-    private MapRequest(boolean noInit) {}
+    private MapArea(boolean noInit) {}
     
-    private static final MapRequest defaultInstance;
-    public static MapRequest getDefaultInstance() {
+    private static final MapArea defaultInstance;
+    public static MapArea getDefaultInstance() {
       return defaultInstance;
     }
     
-    public MapRequest getDefaultInstanceForType() {
+    public MapArea getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapRequest_descriptor;
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapArea_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapRequest_fieldAccessorTable;
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapArea_fieldAccessorTable;
     }
     
     // required .dk.au.perpos.tailing.Position upperLeft = 1;
@@ -2606,41 +2608,41 @@ public final class TailingAgent {
       return size;
     }
     
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(byte[] data)
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(java.io.InputStream input)
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseDelimitedFrom(java.io.InputStream input)
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -2649,7 +2651,7 @@ public final class TailingAgent {
         return null;
       }
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseDelimitedFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2660,12 +2662,12 @@ public final class TailingAgent {
         return null;
       }
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapRequest parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapArea parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2675,25 +2677,25 @@ public final class TailingAgent {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(dk.au.perpos.tailing.TailingAgent.MapRequest prototype) {
+    public static Builder newBuilder(dk.au.perpos.tailing.TailingAgent.MapArea prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private dk.au.perpos.tailing.TailingAgent.MapRequest result;
+      private dk.au.perpos.tailing.TailingAgent.MapArea result;
       
-      // Construct using dk.au.perpos.tailing.TailingAgent.MapRequest.newBuilder()
+      // Construct using dk.au.perpos.tailing.TailingAgent.MapArea.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new dk.au.perpos.tailing.TailingAgent.MapRequest();
+        builder.result = new dk.au.perpos.tailing.TailingAgent.MapArea();
         return builder;
       }
       
-      protected dk.au.perpos.tailing.TailingAgent.MapRequest internalGetResult() {
+      protected dk.au.perpos.tailing.TailingAgent.MapArea internalGetResult() {
         return result;
       }
       
@@ -2702,7 +2704,7 @@ public final class TailingAgent {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new dk.au.perpos.tailing.TailingAgent.MapRequest();
+        result = new dk.au.perpos.tailing.TailingAgent.MapArea();
         return this;
       }
       
@@ -2712,24 +2714,24 @@ public final class TailingAgent {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return dk.au.perpos.tailing.TailingAgent.MapRequest.getDescriptor();
+        return dk.au.perpos.tailing.TailingAgent.MapArea.getDescriptor();
       }
       
-      public dk.au.perpos.tailing.TailingAgent.MapRequest getDefaultInstanceForType() {
-        return dk.au.perpos.tailing.TailingAgent.MapRequest.getDefaultInstance();
+      public dk.au.perpos.tailing.TailingAgent.MapArea getDefaultInstanceForType() {
+        return dk.au.perpos.tailing.TailingAgent.MapArea.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public dk.au.perpos.tailing.TailingAgent.MapRequest build() {
+      public dk.au.perpos.tailing.TailingAgent.MapArea build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private dk.au.perpos.tailing.TailingAgent.MapRequest buildParsed()
+      private dk.au.perpos.tailing.TailingAgent.MapArea buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -2738,27 +2740,27 @@ public final class TailingAgent {
         return buildPartial();
       }
       
-      public dk.au.perpos.tailing.TailingAgent.MapRequest buildPartial() {
+      public dk.au.perpos.tailing.TailingAgent.MapArea buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        dk.au.perpos.tailing.TailingAgent.MapRequest returnMe = result;
+        dk.au.perpos.tailing.TailingAgent.MapArea returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dk.au.perpos.tailing.TailingAgent.MapRequest) {
-          return mergeFrom((dk.au.perpos.tailing.TailingAgent.MapRequest)other);
+        if (other instanceof dk.au.perpos.tailing.TailingAgent.MapArea) {
+          return mergeFrom((dk.au.perpos.tailing.TailingAgent.MapArea)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.MapRequest other) {
-        if (other == dk.au.perpos.tailing.TailingAgent.MapRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.MapArea other) {
+        if (other == dk.au.perpos.tailing.TailingAgent.MapArea.getDefaultInstance()) return this;
         if (other.hasUpperLeft()) {
           mergeUpperLeft(other.getUpperLeft());
         }
@@ -2887,43 +2889,43 @@ public final class TailingAgent {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:dk.au.perpos.tailing.MapRequest)
+      // @@protoc_insertion_point(builder_scope:dk.au.perpos.tailing.MapArea)
     }
     
     static {
-      defaultInstance = new MapRequest(true);
+      defaultInstance = new MapArea(true);
       dk.au.perpos.tailing.TailingAgent.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.MapRequest)
+    // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.MapArea)
   }
   
-  public static final class MapReply extends
+  public static final class MapData extends
       com.google.protobuf.GeneratedMessage {
-    // Use MapReply.newBuilder() to construct.
-    private MapReply() {
+    // Use MapData.newBuilder() to construct.
+    private MapData() {
       initFields();
     }
-    private MapReply(boolean noInit) {}
+    private MapData(boolean noInit) {}
     
-    private static final MapReply defaultInstance;
-    public static MapReply getDefaultInstance() {
+    private static final MapData defaultInstance;
+    public static MapData getDefaultInstance() {
       return defaultInstance;
     }
     
-    public MapReply getDefaultInstanceForType() {
+    public MapData getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapReply_descriptor;
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapData_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapReply_fieldAccessorTable;
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_MapData_fieldAccessorTable;
     }
     
     // required bytes data = 1;
@@ -2964,41 +2966,41 @@ public final class TailingAgent {
       return size;
     }
     
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(byte[] data)
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(java.io.InputStream input)
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseDelimitedFrom(java.io.InputStream input)
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -3007,7 +3009,7 @@ public final class TailingAgent {
         return null;
       }
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseDelimitedFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3018,12 +3020,12 @@ public final class TailingAgent {
         return null;
       }
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static dk.au.perpos.tailing.TailingAgent.MapReply parseFrom(
+    public static dk.au.perpos.tailing.TailingAgent.MapData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3033,25 +3035,25 @@ public final class TailingAgent {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(dk.au.perpos.tailing.TailingAgent.MapReply prototype) {
+    public static Builder newBuilder(dk.au.perpos.tailing.TailingAgent.MapData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private dk.au.perpos.tailing.TailingAgent.MapReply result;
+      private dk.au.perpos.tailing.TailingAgent.MapData result;
       
-      // Construct using dk.au.perpos.tailing.TailingAgent.MapReply.newBuilder()
+      // Construct using dk.au.perpos.tailing.TailingAgent.MapData.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new dk.au.perpos.tailing.TailingAgent.MapReply();
+        builder.result = new dk.au.perpos.tailing.TailingAgent.MapData();
         return builder;
       }
       
-      protected dk.au.perpos.tailing.TailingAgent.MapReply internalGetResult() {
+      protected dk.au.perpos.tailing.TailingAgent.MapData internalGetResult() {
         return result;
       }
       
@@ -3060,7 +3062,7 @@ public final class TailingAgent {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new dk.au.perpos.tailing.TailingAgent.MapReply();
+        result = new dk.au.perpos.tailing.TailingAgent.MapData();
         return this;
       }
       
@@ -3070,24 +3072,24 @@ public final class TailingAgent {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return dk.au.perpos.tailing.TailingAgent.MapReply.getDescriptor();
+        return dk.au.perpos.tailing.TailingAgent.MapData.getDescriptor();
       }
       
-      public dk.au.perpos.tailing.TailingAgent.MapReply getDefaultInstanceForType() {
-        return dk.au.perpos.tailing.TailingAgent.MapReply.getDefaultInstance();
+      public dk.au.perpos.tailing.TailingAgent.MapData getDefaultInstanceForType() {
+        return dk.au.perpos.tailing.TailingAgent.MapData.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public dk.au.perpos.tailing.TailingAgent.MapReply build() {
+      public dk.au.perpos.tailing.TailingAgent.MapData build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private dk.au.perpos.tailing.TailingAgent.MapReply buildParsed()
+      private dk.au.perpos.tailing.TailingAgent.MapData buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -3096,27 +3098,27 @@ public final class TailingAgent {
         return buildPartial();
       }
       
-      public dk.au.perpos.tailing.TailingAgent.MapReply buildPartial() {
+      public dk.au.perpos.tailing.TailingAgent.MapData buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        dk.au.perpos.tailing.TailingAgent.MapReply returnMe = result;
+        dk.au.perpos.tailing.TailingAgent.MapData returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dk.au.perpos.tailing.TailingAgent.MapReply) {
-          return mergeFrom((dk.au.perpos.tailing.TailingAgent.MapReply)other);
+        if (other instanceof dk.au.perpos.tailing.TailingAgent.MapData) {
+          return mergeFrom((dk.au.perpos.tailing.TailingAgent.MapData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.MapReply other) {
-        if (other == dk.au.perpos.tailing.TailingAgent.MapReply.getDefaultInstance()) return this;
+      public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.MapData other) {
+        if (other == dk.au.perpos.tailing.TailingAgent.MapData.getDefaultInstance()) return this;
         if (other.hasData()) {
           setData(other.getData());
         }
@@ -3175,16 +3177,16 @@ public final class TailingAgent {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:dk.au.perpos.tailing.MapReply)
+      // @@protoc_insertion_point(builder_scope:dk.au.perpos.tailing.MapData)
     }
     
     static {
-      defaultInstance = new MapReply(true);
+      defaultInstance = new MapData(true);
       dk.au.perpos.tailing.TailingAgent.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.MapReply)
+    // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.MapData)
   }
   
   public static final class AgentMessage extends
@@ -3221,12 +3223,12 @@ public final class TailingAgent {
     public boolean hasTarget() { return hasTarget; }
     public dk.au.perpos.tailing.TailingAgent.Target getTarget() { return target_; }
     
-    // optional .dk.au.perpos.tailing.MapReply map = 2;
+    // optional .dk.au.perpos.tailing.MapData map = 2;
     public static final int MAP_FIELD_NUMBER = 2;
     private boolean hasMap;
-    private dk.au.perpos.tailing.TailingAgent.MapReply map_;
+    private dk.au.perpos.tailing.TailingAgent.MapData map_;
     public boolean hasMap() { return hasMap; }
-    public dk.au.perpos.tailing.TailingAgent.MapReply getMap() { return map_; }
+    public dk.au.perpos.tailing.TailingAgent.MapData getMap() { return map_; }
     
     // optional .dk.au.perpos.tailing.Reply reply = 3;
     public static final int REPLY_FIELD_NUMBER = 3;
@@ -3235,9 +3237,21 @@ public final class TailingAgent {
     public boolean hasReply() { return hasReply; }
     public dk.au.perpos.tailing.TailingAgent.Reply getReply() { return reply_; }
     
+    // repeated .dk.au.perpos.tailing.Agent agents = 4;
+    public static final int AGENTS_FIELD_NUMBER = 4;
+    private java.util.List<dk.au.perpos.tailing.TailingAgent.Agent> agents_ =
+      java.util.Collections.emptyList();
+    public java.util.List<dk.au.perpos.tailing.TailingAgent.Agent> getAgentsList() {
+      return agents_;
+    }
+    public int getAgentsCount() { return agents_.size(); }
+    public dk.au.perpos.tailing.TailingAgent.Agent getAgents(int index) {
+      return agents_.get(index);
+    }
+    
     private void initFields() {
       target_ = dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance();
-      map_ = dk.au.perpos.tailing.TailingAgent.MapReply.getDefaultInstance();
+      map_ = dk.au.perpos.tailing.TailingAgent.MapData.getDefaultInstance();
       reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
     }
     public final boolean isInitialized() {
@@ -3249,6 +3263,9 @@ public final class TailingAgent {
       }
       if (hasReply()) {
         if (!getReply().isInitialized()) return false;
+      }
+      for (dk.au.perpos.tailing.TailingAgent.Agent element : getAgentsList()) {
+        if (!element.isInitialized()) return false;
       }
       return true;
     }
@@ -3264,6 +3281,9 @@ public final class TailingAgent {
       }
       if (hasReply()) {
         output.writeMessage(3, getReply());
+      }
+      for (dk.au.perpos.tailing.TailingAgent.Agent element : getAgentsList()) {
+        output.writeMessage(4, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3285,6 +3305,10 @@ public final class TailingAgent {
       if (hasReply()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getReply());
+      }
+      for (dk.au.perpos.tailing.TailingAgent.Agent element : getAgentsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3428,6 +3452,10 @@ public final class TailingAgent {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
+        if (result.agents_ != java.util.Collections.EMPTY_LIST) {
+          result.agents_ =
+            java.util.Collections.unmodifiableList(result.agents_);
+        }
         dk.au.perpos.tailing.TailingAgent.AgentMessage returnMe = result;
         result = null;
         return returnMe;
@@ -3452,6 +3480,12 @@ public final class TailingAgent {
         }
         if (other.hasReply()) {
           mergeReply(other.getReply());
+        }
+        if (!other.agents_.isEmpty()) {
+          if (result.agents_.isEmpty()) {
+            result.agents_ = new java.util.ArrayList<dk.au.perpos.tailing.TailingAgent.Agent>();
+          }
+          result.agents_.addAll(other.agents_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3488,7 +3522,7 @@ public final class TailingAgent {
               break;
             }
             case 18: {
-              dk.au.perpos.tailing.TailingAgent.MapReply.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.MapReply.newBuilder();
+              dk.au.perpos.tailing.TailingAgent.MapData.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.MapData.newBuilder();
               if (hasMap()) {
                 subBuilder.mergeFrom(getMap());
               }
@@ -3503,6 +3537,12 @@ public final class TailingAgent {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setReply(subBuilder.buildPartial());
+              break;
+            }
+            case 34: {
+              dk.au.perpos.tailing.TailingAgent.Agent.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Agent.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAgents(subBuilder.buildPartial());
               break;
             }
           }
@@ -3547,14 +3587,14 @@ public final class TailingAgent {
         return this;
       }
       
-      // optional .dk.au.perpos.tailing.MapReply map = 2;
+      // optional .dk.au.perpos.tailing.MapData map = 2;
       public boolean hasMap() {
         return result.hasMap();
       }
-      public dk.au.perpos.tailing.TailingAgent.MapReply getMap() {
+      public dk.au.perpos.tailing.TailingAgent.MapData getMap() {
         return result.getMap();
       }
-      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapReply value) {
+      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapData value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3562,16 +3602,16 @@ public final class TailingAgent {
         result.map_ = value;
         return this;
       }
-      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapReply.Builder builderForValue) {
+      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapData.Builder builderForValue) {
         result.hasMap = true;
         result.map_ = builderForValue.build();
         return this;
       }
-      public Builder mergeMap(dk.au.perpos.tailing.TailingAgent.MapReply value) {
+      public Builder mergeMap(dk.au.perpos.tailing.TailingAgent.MapData value) {
         if (result.hasMap() &&
-            result.map_ != dk.au.perpos.tailing.TailingAgent.MapReply.getDefaultInstance()) {
+            result.map_ != dk.au.perpos.tailing.TailingAgent.MapData.getDefaultInstance()) {
           result.map_ =
-            dk.au.perpos.tailing.TailingAgent.MapReply.newBuilder(result.map_).mergeFrom(value).buildPartial();
+            dk.au.perpos.tailing.TailingAgent.MapData.newBuilder(result.map_).mergeFrom(value).buildPartial();
         } else {
           result.map_ = value;
         }
@@ -3580,7 +3620,7 @@ public final class TailingAgent {
       }
       public Builder clearMap() {
         result.hasMap = false;
-        result.map_ = dk.au.perpos.tailing.TailingAgent.MapReply.getDefaultInstance();
+        result.map_ = dk.au.perpos.tailing.TailingAgent.MapData.getDefaultInstance();
         return this;
       }
       
@@ -3618,6 +3658,57 @@ public final class TailingAgent {
       public Builder clearReply() {
         result.hasReply = false;
         result.reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
+        return this;
+      }
+      
+      // repeated .dk.au.perpos.tailing.Agent agents = 4;
+      public java.util.List<dk.au.perpos.tailing.TailingAgent.Agent> getAgentsList() {
+        return java.util.Collections.unmodifiableList(result.agents_);
+      }
+      public int getAgentsCount() {
+        return result.getAgentsCount();
+      }
+      public dk.au.perpos.tailing.TailingAgent.Agent getAgents(int index) {
+        return result.getAgents(index);
+      }
+      public Builder setAgents(int index, dk.au.perpos.tailing.TailingAgent.Agent value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.agents_.set(index, value);
+        return this;
+      }
+      public Builder setAgents(int index, dk.au.perpos.tailing.TailingAgent.Agent.Builder builderForValue) {
+        result.agents_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addAgents(dk.au.perpos.tailing.TailingAgent.Agent value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.agents_.isEmpty()) {
+          result.agents_ = new java.util.ArrayList<dk.au.perpos.tailing.TailingAgent.Agent>();
+        }
+        result.agents_.add(value);
+        return this;
+      }
+      public Builder addAgents(dk.au.perpos.tailing.TailingAgent.Agent.Builder builderForValue) {
+        if (result.agents_.isEmpty()) {
+          result.agents_ = new java.util.ArrayList<dk.au.perpos.tailing.TailingAgent.Agent>();
+        }
+        result.agents_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllAgents(
+          java.lang.Iterable<? extends dk.au.perpos.tailing.TailingAgent.Agent> values) {
+        if (result.agents_.isEmpty()) {
+          result.agents_ = new java.util.ArrayList<dk.au.perpos.tailing.TailingAgent.Agent>();
+        }
+        super.addAll(values, result.agents_);
+        return this;
+      }
+      public Builder clearAgents() {
+        result.agents_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -3667,45 +3758,34 @@ public final class TailingAgent {
     public boolean hasLogin() { return hasLogin; }
     public dk.au.perpos.tailing.TailingAgent.Login getLogin() { return login_; }
     
-    // optional .dk.au.perpos.tailing.Reply reply = 2;
-    public static final int REPLY_FIELD_NUMBER = 2;
-    private boolean hasReply;
-    private dk.au.perpos.tailing.TailingAgent.Reply reply_;
-    public boolean hasReply() { return hasReply; }
-    public dk.au.perpos.tailing.TailingAgent.Reply getReply() { return reply_; }
-    
-    // optional .dk.au.perpos.tailing.Agent agent = 3;
-    public static final int AGENT_FIELD_NUMBER = 3;
-    private boolean hasAgent;
-    private dk.au.perpos.tailing.TailingAgent.Agent agent_;
-    public boolean hasAgent() { return hasAgent; }
-    public dk.au.perpos.tailing.TailingAgent.Agent getAgent() { return agent_; }
-    
-    // optional .dk.au.perpos.tailing.Target target = 4;
-    public static final int TARGET_FIELD_NUMBER = 4;
+    // optional .dk.au.perpos.tailing.Target target = 2;
+    public static final int TARGET_FIELD_NUMBER = 2;
     private boolean hasTarget;
     private dk.au.perpos.tailing.TailingAgent.Target target_;
     public boolean hasTarget() { return hasTarget; }
     public dk.au.perpos.tailing.TailingAgent.Target getTarget() { return target_; }
     
+    // optional .dk.au.perpos.tailing.MapArea map = 3;
+    public static final int MAP_FIELD_NUMBER = 3;
+    private boolean hasMap;
+    private dk.au.perpos.tailing.TailingAgent.MapArea map_;
+    public boolean hasMap() { return hasMap; }
+    public dk.au.perpos.tailing.TailingAgent.MapArea getMap() { return map_; }
+    
     private void initFields() {
       login_ = dk.au.perpos.tailing.TailingAgent.Login.getDefaultInstance();
-      reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
-      agent_ = dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance();
       target_ = dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance();
+      map_ = dk.au.perpos.tailing.TailingAgent.MapArea.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (hasLogin()) {
         if (!getLogin().isInitialized()) return false;
       }
-      if (hasReply()) {
-        if (!getReply().isInitialized()) return false;
-      }
-      if (hasAgent()) {
-        if (!getAgent().isInitialized()) return false;
-      }
       if (hasTarget()) {
         if (!getTarget().isInitialized()) return false;
+      }
+      if (hasMap()) {
+        if (!getMap().isInitialized()) return false;
       }
       return true;
     }
@@ -3716,14 +3796,11 @@ public final class TailingAgent {
       if (hasLogin()) {
         output.writeMessage(1, getLogin());
       }
-      if (hasReply()) {
-        output.writeMessage(2, getReply());
-      }
-      if (hasAgent()) {
-        output.writeMessage(3, getAgent());
-      }
       if (hasTarget()) {
-        output.writeMessage(4, getTarget());
+        output.writeMessage(2, getTarget());
+      }
+      if (hasMap()) {
+        output.writeMessage(3, getMap());
       }
       getUnknownFields().writeTo(output);
     }
@@ -3738,17 +3815,13 @@ public final class TailingAgent {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getLogin());
       }
-      if (hasReply()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getReply());
-      }
-      if (hasAgent()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getAgent());
-      }
       if (hasTarget()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getTarget());
+          .computeMessageSize(2, getTarget());
+      }
+      if (hasMap()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getMap());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3911,14 +3984,11 @@ public final class TailingAgent {
         if (other.hasLogin()) {
           mergeLogin(other.getLogin());
         }
-        if (other.hasReply()) {
-          mergeReply(other.getReply());
-        }
-        if (other.hasAgent()) {
-          mergeAgent(other.getAgent());
-        }
         if (other.hasTarget()) {
           mergeTarget(other.getTarget());
+        }
+        if (other.hasMap()) {
+          mergeMap(other.getMap());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3955,30 +4025,21 @@ public final class TailingAgent {
               break;
             }
             case 18: {
-              dk.au.perpos.tailing.TailingAgent.Reply.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Reply.newBuilder();
-              if (hasReply()) {
-                subBuilder.mergeFrom(getReply());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setReply(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              dk.au.perpos.tailing.TailingAgent.Agent.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Agent.newBuilder();
-              if (hasAgent()) {
-                subBuilder.mergeFrom(getAgent());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setAgent(subBuilder.buildPartial());
-              break;
-            }
-            case 34: {
               dk.au.perpos.tailing.TailingAgent.Target.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Target.newBuilder();
               if (hasTarget()) {
                 subBuilder.mergeFrom(getTarget());
               }
               input.readMessage(subBuilder, extensionRegistry);
               setTarget(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              dk.au.perpos.tailing.TailingAgent.MapArea.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.MapArea.newBuilder();
+              if (hasMap()) {
+                subBuilder.mergeFrom(getMap());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setMap(subBuilder.buildPartial());
               break;
             }
           }
@@ -4023,81 +4084,7 @@ public final class TailingAgent {
         return this;
       }
       
-      // optional .dk.au.perpos.tailing.Reply reply = 2;
-      public boolean hasReply() {
-        return result.hasReply();
-      }
-      public dk.au.perpos.tailing.TailingAgent.Reply getReply() {
-        return result.getReply();
-      }
-      public Builder setReply(dk.au.perpos.tailing.TailingAgent.Reply value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasReply = true;
-        result.reply_ = value;
-        return this;
-      }
-      public Builder setReply(dk.au.perpos.tailing.TailingAgent.Reply.Builder builderForValue) {
-        result.hasReply = true;
-        result.reply_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeReply(dk.au.perpos.tailing.TailingAgent.Reply value) {
-        if (result.hasReply() &&
-            result.reply_ != dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance()) {
-          result.reply_ =
-            dk.au.perpos.tailing.TailingAgent.Reply.newBuilder(result.reply_).mergeFrom(value).buildPartial();
-        } else {
-          result.reply_ = value;
-        }
-        result.hasReply = true;
-        return this;
-      }
-      public Builder clearReply() {
-        result.hasReply = false;
-        result.reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
-        return this;
-      }
-      
-      // optional .dk.au.perpos.tailing.Agent agent = 3;
-      public boolean hasAgent() {
-        return result.hasAgent();
-      }
-      public dk.au.perpos.tailing.TailingAgent.Agent getAgent() {
-        return result.getAgent();
-      }
-      public Builder setAgent(dk.au.perpos.tailing.TailingAgent.Agent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasAgent = true;
-        result.agent_ = value;
-        return this;
-      }
-      public Builder setAgent(dk.au.perpos.tailing.TailingAgent.Agent.Builder builderForValue) {
-        result.hasAgent = true;
-        result.agent_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeAgent(dk.au.perpos.tailing.TailingAgent.Agent value) {
-        if (result.hasAgent() &&
-            result.agent_ != dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance()) {
-          result.agent_ =
-            dk.au.perpos.tailing.TailingAgent.Agent.newBuilder(result.agent_).mergeFrom(value).buildPartial();
-        } else {
-          result.agent_ = value;
-        }
-        result.hasAgent = true;
-        return this;
-      }
-      public Builder clearAgent() {
-        result.hasAgent = false;
-        result.agent_ = dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance();
-        return this;
-      }
-      
-      // optional .dk.au.perpos.tailing.Target target = 4;
+      // optional .dk.au.perpos.tailing.Target target = 2;
       public boolean hasTarget() {
         return result.hasTarget();
       }
@@ -4131,6 +4118,43 @@ public final class TailingAgent {
       public Builder clearTarget() {
         result.hasTarget = false;
         result.target_ = dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .dk.au.perpos.tailing.MapArea map = 3;
+      public boolean hasMap() {
+        return result.hasMap();
+      }
+      public dk.au.perpos.tailing.TailingAgent.MapArea getMap() {
+        return result.getMap();
+      }
+      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapArea value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasMap = true;
+        result.map_ = value;
+        return this;
+      }
+      public Builder setMap(dk.au.perpos.tailing.TailingAgent.MapArea.Builder builderForValue) {
+        result.hasMap = true;
+        result.map_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeMap(dk.au.perpos.tailing.TailingAgent.MapArea value) {
+        if (result.hasMap() &&
+            result.map_ != dk.au.perpos.tailing.TailingAgent.MapArea.getDefaultInstance()) {
+          result.map_ =
+            dk.au.perpos.tailing.TailingAgent.MapArea.newBuilder(result.map_).mergeFrom(value).buildPartial();
+        } else {
+          result.map_ = value;
+        }
+        result.hasMap = true;
+        return this;
+      }
+      public Builder clearMap() {
+        result.hasMap = false;
+        result.map_ = dk.au.perpos.tailing.TailingAgent.MapArea.getDefaultInstance();
         return this;
       }
       
@@ -4628,15 +4652,15 @@ public final class TailingAgent {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_dk_au_perpos_tailing_Target_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_dk_au_perpos_tailing_MapRequest_descriptor;
+    internal_static_dk_au_perpos_tailing_MapArea_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_dk_au_perpos_tailing_MapRequest_fieldAccessorTable;
+      internal_static_dk_au_perpos_tailing_MapArea_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_dk_au_perpos_tailing_MapReply_descriptor;
+    internal_static_dk_au_perpos_tailing_MapData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_dk_au_perpos_tailing_MapReply_fieldAccessorTable;
+      internal_static_dk_au_perpos_tailing_MapData_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_dk_au_perpos_tailing_AgentMessage_descriptor;
   private static
@@ -4662,35 +4686,36 @@ public final class TailingAgent {
   static {
     java.lang.String[] descriptorData = {
       "\n\022TailingAgent.proto\022\024dk.au.perpos.taili" +
-      "ng\"\021\n\003Msg\022\n\n\002id\030\001 \002(\007\"k\n\005Login\022\014\n\004name\030\001" +
+      "ng\"\021\n\003Msg\022\n\n\002id\030\001 \002(\007\"~\n\005Login\022\014\n\004name\030\001" +
       " \002(\t\0224\n\nclientType\030\002 \002(\0162 .dk.au.perpos." +
-      "tailing.Login.Type\"\036\n\004Type\022\t\n\005Agent\020\000\022\013\n" +
-      "\007Manager\020\001\"i\n\005Reply\0225\n\ttheAnswer\030\001 \002(\0162\"" +
-      ".dk.au.perpos.tailing.Reply.Answer\022\014\n\004te" +
-      "xt\030\002 \001(\t\"\033\n\006Answer\022\006\n\002Ok\020\000\022\t\n\005NotOk\020\001\"A\n" +
-      "\010Position\022\021\n\tlongitude\030\001 \002(\001\022\020\n\010latitude" +
-      "\030\002 \002(\001\022\020\n\010altitude\030\003 \001(\001\"W\n\006Person\022+\n\003po" +
-      "s\030\001 \002(\0132\036.dk.au.perpos.tailing.Position\022",
-      "\021\n\tdirection\030\002 \002(\001\022\r\n\005speed\030\003 \002(\001\"@\n\005Age" +
-      "nt\022\014\n\004name\030\001 \002(\t\022)\n\003per\030\002 \002(\0132\034.dk.au.pe" +
-      "rpos.tailing.Person\"3\n\006Target\022)\n\003per\030\001 \002" +
-      "(\0132\034.dk.au.perpos.tailing.Person\"s\n\nMapR" +
-      "equest\0221\n\tupperLeft\030\001 \002(\0132\036.dk.au.perpos" +
-      ".tailing.Position\0222\n\nlowerRight\030\002 \002(\0132\036." +
-      "dk.au.perpos.tailing.Position\"\030\n\010MapRepl" +
-      "y\022\014\n\004data\030\001 \002(\014\"\225\001\n\014AgentMessage\022,\n\006targ" +
-      "et\030\001 \001(\0132\034.dk.au.perpos.tailing.Target\022+" +
-      "\n\003map\030\002 \001(\0132\036.dk.au.perpos.tailing.MapRe",
-      "ply\022*\n\005reply\030\003 \001(\0132\033.dk.au.perpos.tailin" +
-      "g.Reply\"\301\001\n\rServerMessage\022*\n\005login\030\001 \001(\013" +
-      "2\033.dk.au.perpos.tailing.Login\022*\n\005reply\030\002" +
-      " \001(\0132\033.dk.au.perpos.tailing.Reply\022*\n\005age" +
-      "nt\030\003 \001(\0132\033.dk.au.perpos.tailing.Agent\022,\n" +
-      "\006target\030\004 \001(\0132\034.dk.au.perpos.tailing.Tar" +
-      "get\"\226\001\n\016ManagerMessage\022*\n\005reply\030\001 \001(\0132\033." +
-      "dk.au.perpos.tailing.Reply\022*\n\005agent\030\002 \001(" +
-      "\0132\033.dk.au.perpos.tailing.Agent\022,\n\006target" +
-      "\030\003 \001(\0132\034.dk.au.perpos.tailing.Target"
+      "tailing.Login.Type\"1\n\004Type\022\t\n\005Agent\020\000\022\013\n" +
+      "\007Manager\020\001\022\021\n\rAgentCallback\020\002\"f\n\005Reply\0222" +
+      "\n\006answer\030\001 \002(\0162\".dk.au.perpos.tailing.Re" +
+      "ply.Answer\022\014\n\004text\030\002 \001(\t\"\033\n\006Answer\022\006\n\002Ok" +
+      "\020\000\022\t\n\005NotOk\020\001\"A\n\010Position\022\021\n\tlongitude\030\001" +
+      " \002(\001\022\020\n\010latitude\030\002 \002(\001\022\020\n\010altitude\030\003 \001(\001" +
+      "\"\\\n\006Person\0220\n\010position\030\001 \002(\0132\036.dk.au.per",
+      "pos.tailing.Position\022\021\n\tdirection\030\002 \002(\001\022" +
+      "\r\n\005speed\030\003 \002(\001\"C\n\005Agent\022\014\n\004name\030\001 \002(\t\022,\n" +
+      "\006person\030\002 \002(\0132\034.dk.au.perpos.tailing.Per" +
+      "son\"6\n\006Target\022,\n\006person\030\001 \002(\0132\034.dk.au.pe" +
+      "rpos.tailing.Person\"p\n\007MapArea\0221\n\tupperL" +
+      "eft\030\001 \002(\0132\036.dk.au.perpos.tailing.Positio" +
+      "n\0222\n\nlowerRight\030\002 \002(\0132\036.dk.au.perpos.tai" +
+      "ling.Position\"\027\n\007MapData\022\014\n\004data\030\001 \002(\014\"\301" +
+      "\001\n\014AgentMessage\022,\n\006target\030\001 \001(\0132\034.dk.au." +
+      "perpos.tailing.Target\022*\n\003map\030\002 \001(\0132\035.dk.",
+      "au.perpos.tailing.MapData\022*\n\005reply\030\003 \001(\013" +
+      "2\033.dk.au.perpos.tailing.Reply\022+\n\006agents\030" +
+      "\004 \003(\0132\033.dk.au.perpos.tailing.Agent\"\225\001\n\rS" +
+      "erverMessage\022*\n\005login\030\001 \001(\0132\033.dk.au.perp" +
+      "os.tailing.Login\022,\n\006target\030\002 \001(\0132\034.dk.au" +
+      ".perpos.tailing.Target\022*\n\003map\030\003 \001(\0132\035.dk" +
+      ".au.perpos.tailing.MapArea\"\226\001\n\016ManagerMe" +
+      "ssage\022*\n\005reply\030\001 \001(\0132\033.dk.au.perpos.tail" +
+      "ing.Reply\022*\n\005agent\030\002 \001(\0132\033.dk.au.perpos." +
+      "tailing.Agent\022,\n\006target\030\003 \001(\0132\034.dk.au.pe",
+      "rpos.tailing.Target"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4718,7 +4743,7 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_Reply_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Reply_descriptor,
-              new java.lang.String[] { "TheAnswer", "Text", },
+              new java.lang.String[] { "Answer", "Text", },
               dk.au.perpos.tailing.TailingAgent.Reply.class,
               dk.au.perpos.tailing.TailingAgent.Reply.Builder.class);
           internal_static_dk_au_perpos_tailing_Position_descriptor =
@@ -4734,7 +4759,7 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_Person_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Person_descriptor,
-              new java.lang.String[] { "Pos", "Direction", "Speed", },
+              new java.lang.String[] { "Position", "Direction", "Speed", },
               dk.au.perpos.tailing.TailingAgent.Person.class,
               dk.au.perpos.tailing.TailingAgent.Person.Builder.class);
           internal_static_dk_au_perpos_tailing_Agent_descriptor =
@@ -4742,7 +4767,7 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_Agent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Agent_descriptor,
-              new java.lang.String[] { "Name", "Per", },
+              new java.lang.String[] { "Name", "Person", },
               dk.au.perpos.tailing.TailingAgent.Agent.class,
               dk.au.perpos.tailing.TailingAgent.Agent.Builder.class);
           internal_static_dk_au_perpos_tailing_Target_descriptor =
@@ -4750,31 +4775,31 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_Target_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Target_descriptor,
-              new java.lang.String[] { "Per", },
+              new java.lang.String[] { "Person", },
               dk.au.perpos.tailing.TailingAgent.Target.class,
               dk.au.perpos.tailing.TailingAgent.Target.Builder.class);
-          internal_static_dk_au_perpos_tailing_MapRequest_descriptor =
+          internal_static_dk_au_perpos_tailing_MapArea_descriptor =
             getDescriptor().getMessageTypes().get(7);
-          internal_static_dk_au_perpos_tailing_MapRequest_fieldAccessorTable = new
+          internal_static_dk_au_perpos_tailing_MapArea_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_dk_au_perpos_tailing_MapRequest_descriptor,
+              internal_static_dk_au_perpos_tailing_MapArea_descriptor,
               new java.lang.String[] { "UpperLeft", "LowerRight", },
-              dk.au.perpos.tailing.TailingAgent.MapRequest.class,
-              dk.au.perpos.tailing.TailingAgent.MapRequest.Builder.class);
-          internal_static_dk_au_perpos_tailing_MapReply_descriptor =
+              dk.au.perpos.tailing.TailingAgent.MapArea.class,
+              dk.au.perpos.tailing.TailingAgent.MapArea.Builder.class);
+          internal_static_dk_au_perpos_tailing_MapData_descriptor =
             getDescriptor().getMessageTypes().get(8);
-          internal_static_dk_au_perpos_tailing_MapReply_fieldAccessorTable = new
+          internal_static_dk_au_perpos_tailing_MapData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_dk_au_perpos_tailing_MapReply_descriptor,
+              internal_static_dk_au_perpos_tailing_MapData_descriptor,
               new java.lang.String[] { "Data", },
-              dk.au.perpos.tailing.TailingAgent.MapReply.class,
-              dk.au.perpos.tailing.TailingAgent.MapReply.Builder.class);
+              dk.au.perpos.tailing.TailingAgent.MapData.class,
+              dk.au.perpos.tailing.TailingAgent.MapData.Builder.class);
           internal_static_dk_au_perpos_tailing_AgentMessage_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_dk_au_perpos_tailing_AgentMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_AgentMessage_descriptor,
-              new java.lang.String[] { "Target", "Map", "Reply", },
+              new java.lang.String[] { "Target", "Map", "Reply", "Agents", },
               dk.au.perpos.tailing.TailingAgent.AgentMessage.class,
               dk.au.perpos.tailing.TailingAgent.AgentMessage.Builder.class);
           internal_static_dk_au_perpos_tailing_ServerMessage_descriptor =
@@ -4782,7 +4807,7 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_ServerMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_ServerMessage_descriptor,
-              new java.lang.String[] { "Login", "Reply", "Agent", "Target", },
+              new java.lang.String[] { "Login", "Target", "Map", },
               dk.au.perpos.tailing.TailingAgent.ServerMessage.class,
               dk.au.perpos.tailing.TailingAgent.ServerMessage.Builder.class);
           internal_static_dk_au_perpos_tailing_ManagerMessage_descriptor =
