@@ -1,4 +1,4 @@
-package dk.au.perpos.tailing;
+package dk.au.perpos.tailing.server;
 
 import java.net.Socket;
 
