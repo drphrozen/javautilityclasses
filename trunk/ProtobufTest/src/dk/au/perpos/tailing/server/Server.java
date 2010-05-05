@@ -1,17 +1,17 @@
-package dk.au.perpos.tailing;
+package dk.au.perpos.tailing.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TailingServer implements Runnable {
+public class Server implements Runnable {
 
 	private final ExecutorService	pool	= Executors.newFixedThreadPool(20);
 	private final ServerSocket		serverSocket;
 	private volatile boolean			isRunning;
 
-	public TailingServer() throws IOException {
+	public Server() throws IOException {
 		serverSocket = new ServerSocket(15339);
 	}
 
@@ -34,6 +34,14 @@ public class TailingServer implements Runnable {
 		isRunning = false;
 		try {
 			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			new Server().run();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
