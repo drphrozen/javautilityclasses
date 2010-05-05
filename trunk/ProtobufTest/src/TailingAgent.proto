@@ -74,6 +74,8 @@ message ServerMessage
 {
 	optional Login login = 1;
 	optional Reply reply = 2;
+	optional Agent agent = 3;
+	optional Target target = 4;
 }
 
 message ManagerMessage
