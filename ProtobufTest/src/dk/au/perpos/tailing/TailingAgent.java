@@ -3674,9 +3674,25 @@ public final class TailingAgent {
     public boolean hasReply() { return hasReply; }
     public dk.au.perpos.tailing.TailingAgent.Reply getReply() { return reply_; }
     
+    // optional .dk.au.perpos.tailing.Agent agent = 3;
+    public static final int AGENT_FIELD_NUMBER = 3;
+    private boolean hasAgent;
+    private dk.au.perpos.tailing.TailingAgent.Agent agent_;
+    public boolean hasAgent() { return hasAgent; }
+    public dk.au.perpos.tailing.TailingAgent.Agent getAgent() { return agent_; }
+    
+    // optional .dk.au.perpos.tailing.Target target = 4;
+    public static final int TARGET_FIELD_NUMBER = 4;
+    private boolean hasTarget;
+    private dk.au.perpos.tailing.TailingAgent.Target target_;
+    public boolean hasTarget() { return hasTarget; }
+    public dk.au.perpos.tailing.TailingAgent.Target getTarget() { return target_; }
+    
     private void initFields() {
       login_ = dk.au.perpos.tailing.TailingAgent.Login.getDefaultInstance();
       reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
+      agent_ = dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance();
+      target_ = dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (hasLogin()) {
@@ -3684,6 +3700,12 @@ public final class TailingAgent {
       }
       if (hasReply()) {
         if (!getReply().isInitialized()) return false;
+      }
+      if (hasAgent()) {
+        if (!getAgent().isInitialized()) return false;
+      }
+      if (hasTarget()) {
+        if (!getTarget().isInitialized()) return false;
       }
       return true;
     }
@@ -3696,6 +3718,12 @@ public final class TailingAgent {
       }
       if (hasReply()) {
         output.writeMessage(2, getReply());
+      }
+      if (hasAgent()) {
+        output.writeMessage(3, getAgent());
+      }
+      if (hasTarget()) {
+        output.writeMessage(4, getTarget());
       }
       getUnknownFields().writeTo(output);
     }
@@ -3713,6 +3741,14 @@ public final class TailingAgent {
       if (hasReply()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getReply());
+      }
+      if (hasAgent()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getAgent());
+      }
+      if (hasTarget()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getTarget());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3878,6 +3914,12 @@ public final class TailingAgent {
         if (other.hasReply()) {
           mergeReply(other.getReply());
         }
+        if (other.hasAgent()) {
+          mergeAgent(other.getAgent());
+        }
+        if (other.hasTarget()) {
+          mergeTarget(other.getTarget());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -3919,6 +3961,24 @@ public final class TailingAgent {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setReply(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              dk.au.perpos.tailing.TailingAgent.Agent.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Agent.newBuilder();
+              if (hasAgent()) {
+                subBuilder.mergeFrom(getAgent());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setAgent(subBuilder.buildPartial());
+              break;
+            }
+            case 34: {
+              dk.au.perpos.tailing.TailingAgent.Target.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Target.newBuilder();
+              if (hasTarget()) {
+                subBuilder.mergeFrom(getTarget());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setTarget(subBuilder.buildPartial());
               break;
             }
           }
@@ -3997,6 +4057,80 @@ public final class TailingAgent {
       public Builder clearReply() {
         result.hasReply = false;
         result.reply_ = dk.au.perpos.tailing.TailingAgent.Reply.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .dk.au.perpos.tailing.Agent agent = 3;
+      public boolean hasAgent() {
+        return result.hasAgent();
+      }
+      public dk.au.perpos.tailing.TailingAgent.Agent getAgent() {
+        return result.getAgent();
+      }
+      public Builder setAgent(dk.au.perpos.tailing.TailingAgent.Agent value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasAgent = true;
+        result.agent_ = value;
+        return this;
+      }
+      public Builder setAgent(dk.au.perpos.tailing.TailingAgent.Agent.Builder builderForValue) {
+        result.hasAgent = true;
+        result.agent_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeAgent(dk.au.perpos.tailing.TailingAgent.Agent value) {
+        if (result.hasAgent() &&
+            result.agent_ != dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance()) {
+          result.agent_ =
+            dk.au.perpos.tailing.TailingAgent.Agent.newBuilder(result.agent_).mergeFrom(value).buildPartial();
+        } else {
+          result.agent_ = value;
+        }
+        result.hasAgent = true;
+        return this;
+      }
+      public Builder clearAgent() {
+        result.hasAgent = false;
+        result.agent_ = dk.au.perpos.tailing.TailingAgent.Agent.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .dk.au.perpos.tailing.Target target = 4;
+      public boolean hasTarget() {
+        return result.hasTarget();
+      }
+      public dk.au.perpos.tailing.TailingAgent.Target getTarget() {
+        return result.getTarget();
+      }
+      public Builder setTarget(dk.au.perpos.tailing.TailingAgent.Target value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasTarget = true;
+        result.target_ = value;
+        return this;
+      }
+      public Builder setTarget(dk.au.perpos.tailing.TailingAgent.Target.Builder builderForValue) {
+        result.hasTarget = true;
+        result.target_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeTarget(dk.au.perpos.tailing.TailingAgent.Target value) {
+        if (result.hasTarget() &&
+            result.target_ != dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance()) {
+          result.target_ =
+            dk.au.perpos.tailing.TailingAgent.Target.newBuilder(result.target_).mergeFrom(value).buildPartial();
+        } else {
+          result.target_ = value;
+        }
+        result.hasTarget = true;
+        return this;
+      }
+      public Builder clearTarget() {
+        result.hasTarget = false;
+        result.target_ = dk.au.perpos.tailing.TailingAgent.Target.getDefaultInstance();
         return this;
       }
       
@@ -4548,13 +4682,15 @@ public final class TailingAgent {
       "et\030\001 \001(\0132\034.dk.au.perpos.tailing.Target\022+" +
       "\n\003map\030\002 \001(\0132\036.dk.au.perpos.tailing.MapRe",
       "ply\022*\n\005reply\030\003 \001(\0132\033.dk.au.perpos.tailin" +
-      "g.Reply\"g\n\rServerMessage\022*\n\005login\030\001 \001(\0132" +
-      "\033.dk.au.perpos.tailing.Login\022*\n\005reply\030\002 " +
-      "\001(\0132\033.dk.au.perpos.tailing.Reply\"\226\001\n\016Man" +
-      "agerMessage\022*\n\005reply\030\001 \001(\0132\033.dk.au.perpo" +
-      "s.tailing.Reply\022*\n\005agent\030\002 \001(\0132\033.dk.au.p" +
-      "erpos.tailing.Agent\022,\n\006target\030\003 \001(\0132\034.dk" +
-      ".au.perpos.tailing.Target"
+      "g.Reply\"\301\001\n\rServerMessage\022*\n\005login\030\001 \001(\013" +
+      "2\033.dk.au.perpos.tailing.Login\022*\n\005reply\030\002" +
+      " \001(\0132\033.dk.au.perpos.tailing.Reply\022*\n\005age" +
+      "nt\030\003 \001(\0132\033.dk.au.perpos.tailing.Agent\022,\n" +
+      "\006target\030\004 \001(\0132\034.dk.au.perpos.tailing.Tar" +
+      "get\"\226\001\n\016ManagerMessage\022*\n\005reply\030\001 \001(\0132\033." +
+      "dk.au.perpos.tailing.Reply\022*\n\005agent\030\002 \001(" +
+      "\0132\033.dk.au.perpos.tailing.Agent\022,\n\006target" +
+      "\030\003 \001(\0132\034.dk.au.perpos.tailing.Target"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4646,7 +4782,7 @@ public final class TailingAgent {
           internal_static_dk_au_perpos_tailing_ServerMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_ServerMessage_descriptor,
-              new java.lang.String[] { "Login", "Reply", },
+              new java.lang.String[] { "Login", "Reply", "Agent", "Target", },
               dk.au.perpos.tailing.TailingAgent.ServerMessage.class,
               dk.au.perpos.tailing.TailingAgent.ServerMessage.Builder.class);
           internal_static_dk_au_perpos_tailing_ManagerMessage_descriptor =
