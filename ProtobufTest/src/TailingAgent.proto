@@ -1,7 +1,9 @@
 package dk.au.perpos.tailing;
-//option cc_abstract_services = false;
-//option java_abstract_services = false;
-//option py_abstract_services = false;
+
+message Msg
+{
+	required fixed32 id = 1;
+}
 
 message Login
 {
@@ -61,6 +63,22 @@ message MapReply
 	required bytes data = 1;
 }
 
-service TestService {
-  rpc Test (Login) returns (Reply);
+message AgentMessage
+{
+	optional Target target = 1;
+	optional MapReply map = 2;
+	optional Reply reply = 3;
+}
+
+message ServerMessage
+{
+	optional Login login = 1;
+	optional Reply reply = 2;
+}
+
+message ManagerMessage
+{
+	optional Reply reply = 1;
+	optional Agent agent = 2;
+	optional Target target = 3;
 }
