@@ -42,6 +42,18 @@ message Person
 	required double speed = 3;
 }
 
+message IdentifiedPerson
+{
+	required Person person = 1;
+	required string name = 2;
+	enum Type
+	{
+		Agent = 1;
+		Target = 2;
+	}
+	required Type type = 3;
+}
+
 message Agent
 {
 	required string name = 1;

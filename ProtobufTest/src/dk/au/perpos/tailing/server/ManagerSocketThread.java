@@ -4,8 +4,8 @@ import java.net.Socket;
 
 public class ManagerSocketThread extends SocketThread {
 
-	public ManagerSocketThread(Socket clientSocket, String name, ShutdownCallback shutdownCallback) {
-		super(clientSocket, name, shutdownCallback);
+	public ManagerSocketThread(Socket clientSocket, String name) {
+		super(clientSocket, name, null);
 	}
 
 	@Override

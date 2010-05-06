@@ -10,7 +10,7 @@ public class Server implements Runnable {
 	private final ExecutorService	pool	= Executors.newFixedThreadPool(20);
 	private final ServerSocket		serverSocket;
 	private volatile boolean			isRunning;
-
+	
 	public Server() throws IOException {
 		serverSocket = new ServerSocket(15339);
 	}
@@ -18,8 +18,11 @@ public class Server implements Runnable {
 	@Override
 	public void run() {
 		
+		MessagePublisher.instance.start();
+		
 		SocketThreadManager socketThreadManager = new SocketThreadManager();
 		System.out.println("The server is running..");
+		
 		isRunning = true;
 		while (isRunning) {
 			try {
@@ -28,6 +31,8 @@ public class Server implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		
+		MessagePublisher.instance.stop();
 		System.out.println("The server was shutdown!");
 	}
 
@@ -47,5 +52,36 @@ public class Server implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+//		MessagePublisher dataStore = new MessagePublisher();
+//		Thread dataStoreThread = new Thread(dataStore);
+//		dataStoreThread.start();
+//		dataStore.addMessageSubscriber(new MessageSubscriber<Msg>() {
+//			@Override
+//			public void OnSignal(Msg value) {
+//				System.out.println("YEah: " + value);
+//			}
+//		}, Msg.class);
+//		dataStore.addMessageSubscriber(new MessageSubscriber<Msg>() {
+//			@Override
+//			public void OnSignal(Msg value) {
+//				System.out.println("Ohhh: " + value);
+//			}
+//		}, Msg.class);
+//		dataStore.addMessageSubscriber(new MessageSubscriber<Reply>() {
+//			@Override
+//			public void OnSignal(Reply value) {
+//				System.out.println("Wee: " + value);
+//			}
+//		}, Reply.class);
+//		dataStore.Publish(Msg.newBuilder().setId(2).build());
+//		dataStore.Publish(Reply.newBuilder().setAnswer(Answer.Ok).setText("Buuuh").build());
+//		try {
+//			Thread.sleep(1000);
+//			dataStoreThread.interrupt();
+//			dataStoreThread.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
 }
