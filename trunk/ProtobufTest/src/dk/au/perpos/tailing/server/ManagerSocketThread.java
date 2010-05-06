@@ -4,12 +4,13 @@ import java.net.Socket;
 
 public class ManagerSocketThread extends SocketThread {
 
-	public ManagerSocketThread(Socket clientSocket, String name) {
-		super(clientSocket, name);
+	public ManagerSocketThread(Socket clientSocket, String name, ShutdownCallback shutdownCallback) {
+		super(clientSocket, name, shutdownCallback);
 	}
 
 	@Override
-	public void run() {
-
+	public void process() {
+		// TODO Auto-generated method stub
+		
 	}
 }

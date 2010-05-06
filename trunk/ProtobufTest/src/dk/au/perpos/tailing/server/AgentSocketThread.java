@@ -4,12 +4,12 @@ import java.net.Socket;
 
 public class AgentSocketThread extends SocketThread {
 
-	public AgentSocketThread(Socket clientSocket, String name) {
-		super(clientSocket, name);
+	public AgentSocketThread(Socket clientSocket, String name, ShutdownCallback shutdownCallback) {
+		super(clientSocket, name, shutdownCallback);
 	}
 
 	@Override
-	public void run() {
-
+	public void process() {
+		
 	}
 }

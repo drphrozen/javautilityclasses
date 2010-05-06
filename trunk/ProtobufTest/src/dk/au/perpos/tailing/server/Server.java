@@ -17,11 +17,13 @@ public class Server implements Runnable {
 
 	@Override
 	public void run() {
+		
+		SocketThreadManager socketThreadManager = new SocketThreadManager();
 		System.out.println("The server is running..");
 		isRunning = true;
 		while (isRunning) {
 			try {
-				pool.execute(SocketThreadFactory.newSocketThread(serverSocket.accept()));
+				pool.execute(socketThreadManager.newSocketThread(serverSocket.accept()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

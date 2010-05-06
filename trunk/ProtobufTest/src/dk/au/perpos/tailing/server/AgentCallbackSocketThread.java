@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import dk.au.perpos.tailing.TailingAgent.AgentMessage;
-import dk.au.perpos.tailing.TailingAgent.Person;
-import dk.au.perpos.tailing.TailingAgent.Position;
-import dk.au.perpos.tailing.TailingAgent.Target;
 import dk.au.perpos.tailing.TailingAgent.Agent;
+import dk.au.perpos.tailing.TailingAgent.AgentMessage;
+import dk.au.perpos.tailing.TailingAgent.Target;
 
 public class AgentCallbackSocketThread extends SocketThread {
 
@@ -19,32 +17,12 @@ public class AgentCallbackSocketThread extends SocketThread {
 	 * A thread that handles callbacks to the agent. 
 	 * @param clientSocket The socket to send callbacks on.
 	 * @param name The name of the this socket thread.
+	 * @param shutdownCallback 
 	 */
-	public AgentCallbackSocketThread(Socket clientSocket, String name) {
-		super(clientSocket, name);
+	public AgentCallbackSocketThread(Socket clientSocket, String name, ShutdownCallback shutdownCallback) {
+		super(clientSocket, name, shutdownCallback);
 	}
 
-	@Override
-	public void run() {
-		isRunning = true;
-		while(isRunning) {
-			try {
-				AgentMessage message = queue.take();
-				message.writeDelimitedTo(clientSocket.getOutputStream());
-			} catch (IOException e) {
-				isRunning = false;
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				isRunning = false;
-			}
-		}
-		try {
-			clientSocket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * Emits an event to the Agent.
 	 * @param target A Target to emit.
@@ -82,47 +60,24 @@ public class AgentCallbackSocketThread extends SocketThread {
 		return queue.offer(message);
 	}
 	
-	/**
-	 * Creates a Target.
-	 * @return A new Target.
-	 */
-	public Target createTarget(Person person) {
-		return Target.newBuilder()
-			.setPerson(person)
-			.build();
-	}
-	
-	/**
-	 * Creates a Person. 
-	 * @param direction The direction in which the target is moving.
-	 * @param speed The speed at which the target is moving.
-	 * @param altitude The altitude portion of the targets position. 
-	 * @param longitude The longitude portion of the targets position.
-	 * @param latitude The latitude portion of the targets position.
-	 * @return A new Person.
-	 */
-	public Person newPerson(double direction, double speed, double altitude, double longitude, double latitude) {
-		return Person.newBuilder()
-			.setDirection(direction)
-			.setSpeed(speed)
-			.setPosition(Position.newBuilder()
-				.setAltitude(altitude)
-				.setLongitude(longitude)
-				.setLatitude(latitude)
-				.build())
-			.build();
-	}
-	
-	/**
-	 * Creates an Agent.
-	 * @param name The name of the Agent.
-	 * @param person The person.
-	 * @return A new Agent.
-	 */
-	public Agent createAgent(String name, Person person) {
-		return Agent.newBuilder()
-			.setName(name)
-			.setPerson(person)
-			.build();
+	@Override
+	public void process() {
+		isRunning = true;
+		while(isRunning) {
+			try {
+				AgentMessage message = queue.take();
+				message.writeDelimitedTo(clientSocket.getOutputStream());
+			} catch (IOException e) {
+				isRunning = false;
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				isRunning = false;
+			}
+		}
+		try {
+			clientSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
