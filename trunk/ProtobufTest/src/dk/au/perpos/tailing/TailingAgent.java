@@ -1859,6 +1859,477 @@ public final class TailingAgent {
     // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.Person)
   }
   
+  public static final class IdentifiedPerson extends
+      com.google.protobuf.GeneratedMessage {
+    // Use IdentifiedPerson.newBuilder() to construct.
+    private IdentifiedPerson() {
+      initFields();
+    }
+    private IdentifiedPerson(boolean noInit) {}
+    
+    private static final IdentifiedPerson defaultInstance;
+    public static IdentifiedPerson getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public IdentifiedPerson getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_IdentifiedPerson_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return dk.au.perpos.tailing.TailingAgent.internal_static_dk_au_perpos_tailing_IdentifiedPerson_fieldAccessorTable;
+    }
+    
+    public enum Type
+        implements com.google.protobuf.ProtocolMessageEnum {
+      Agent(0, 1),
+      Target(1, 2),
+      ;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static Type valueOf(int value) {
+        switch (value) {
+          case 1: return Agent;
+          case 2: return Target;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+              public Type findValueByNumber(int number) {
+                return Type.valueOf(number)
+      ;        }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final Type[] VALUES = {
+        Agent, Target, 
+      };
+      public static Type valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      private final int index;
+      private final int value;
+      private Type(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      static {
+        dk.au.perpos.tailing.TailingAgent.getDescriptor();
+      }
+      
+      // @@protoc_insertion_point(enum_scope:dk.au.perpos.tailing.IdentifiedPerson.Type)
+    }
+    
+    // required .dk.au.perpos.tailing.Person person = 1;
+    public static final int PERSON_FIELD_NUMBER = 1;
+    private boolean hasPerson;
+    private dk.au.perpos.tailing.TailingAgent.Person person_;
+    public boolean hasPerson() { return hasPerson; }
+    public dk.au.perpos.tailing.TailingAgent.Person getPerson() { return person_; }
+    
+    // required string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // required .dk.au.perpos.tailing.IdentifiedPerson.Type type = 3;
+    public static final int TYPE_FIELD_NUMBER = 3;
+    private boolean hasType;
+    private dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type type_;
+    public boolean hasType() { return hasType; }
+    public dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type getType() { return type_; }
+    
+    private void initFields() {
+      person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+      type_ = dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type.Agent;
+    }
+    public final boolean isInitialized() {
+      if (!hasPerson) return false;
+      if (!hasName) return false;
+      if (!hasType) return false;
+      if (!getPerson().isInitialized()) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasPerson()) {
+        output.writeMessage(1, getPerson());
+      }
+      if (hasName()) {
+        output.writeString(2, getName());
+      }
+      if (hasType()) {
+        output.writeEnum(3, getType().getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasPerson()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getPerson());
+      }
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getName());
+      }
+      if (hasType()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, getType().getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static dk.au.perpos.tailing.TailingAgent.IdentifiedPerson parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(dk.au.perpos.tailing.TailingAgent.IdentifiedPerson prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private dk.au.perpos.tailing.TailingAgent.IdentifiedPerson result;
+      
+      // Construct using dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new dk.au.perpos.tailing.TailingAgent.IdentifiedPerson();
+        return builder;
+      }
+      
+      protected dk.au.perpos.tailing.TailingAgent.IdentifiedPerson internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new dk.au.perpos.tailing.TailingAgent.IdentifiedPerson();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.getDescriptor();
+      }
+      
+      public dk.au.perpos.tailing.TailingAgent.IdentifiedPerson getDefaultInstanceForType() {
+        return dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public dk.au.perpos.tailing.TailingAgent.IdentifiedPerson build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private dk.au.perpos.tailing.TailingAgent.IdentifiedPerson buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public dk.au.perpos.tailing.TailingAgent.IdentifiedPerson buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        dk.au.perpos.tailing.TailingAgent.IdentifiedPerson returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof dk.au.perpos.tailing.TailingAgent.IdentifiedPerson) {
+          return mergeFrom((dk.au.perpos.tailing.TailingAgent.IdentifiedPerson)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(dk.au.perpos.tailing.TailingAgent.IdentifiedPerson other) {
+        if (other == dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.getDefaultInstance()) return this;
+        if (other.hasPerson()) {
+          mergePerson(other.getPerson());
+        }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              dk.au.perpos.tailing.TailingAgent.Person.Builder subBuilder = dk.au.perpos.tailing.TailingAgent.Person.newBuilder();
+              if (hasPerson()) {
+                subBuilder.mergeFrom(getPerson());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPerson(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              setName(input.readString());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type value = dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                setType(value);
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required .dk.au.perpos.tailing.Person person = 1;
+      public boolean hasPerson() {
+        return result.hasPerson();
+      }
+      public dk.au.perpos.tailing.TailingAgent.Person getPerson() {
+        return result.getPerson();
+      }
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasPerson = true;
+        result.person_ = value;
+        return this;
+      }
+      public Builder setPerson(dk.au.perpos.tailing.TailingAgent.Person.Builder builderForValue) {
+        result.hasPerson = true;
+        result.person_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergePerson(dk.au.perpos.tailing.TailingAgent.Person value) {
+        if (result.hasPerson() &&
+            result.person_ != dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance()) {
+          result.person_ =
+            dk.au.perpos.tailing.TailingAgent.Person.newBuilder(result.person_).mergeFrom(value).buildPartial();
+        } else {
+          result.person_ = value;
+        }
+        result.hasPerson = true;
+        return this;
+      }
+      public Builder clearPerson() {
+        result.hasPerson = false;
+        result.person_ = dk.au.perpos.tailing.TailingAgent.Person.getDefaultInstance();
+        return this;
+      }
+      
+      // required string name = 2;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // required .dk.au.perpos.tailing.IdentifiedPerson.Type type = 3;
+      public boolean hasType() {
+        return result.hasType();
+      }
+      public dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type getType() {
+        return result.getType();
+      }
+      public Builder setType(dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder clearType() {
+        result.hasType = false;
+        result.type_ = dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Type.Agent;
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:dk.au.perpos.tailing.IdentifiedPerson)
+    }
+    
+    static {
+      defaultInstance = new IdentifiedPerson(true);
+      dk.au.perpos.tailing.TailingAgent.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:dk.au.perpos.tailing.IdentifiedPerson)
+  }
+  
   public static final class Agent extends
       com.google.protobuf.GeneratedMessage {
     // Use Agent.newBuilder() to construct.
@@ -4642,6 +5113,11 @@ public final class TailingAgent {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_dk_au_perpos_tailing_Person_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_au_perpos_tailing_IdentifiedPerson_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_dk_au_perpos_tailing_IdentifiedPerson_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_dk_au_perpos_tailing_Agent_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -4696,26 +5172,30 @@ public final class TailingAgent {
       " \002(\001\022\020\n\010latitude\030\002 \002(\001\022\020\n\010altitude\030\003 \001(\001" +
       "\"\\\n\006Person\0220\n\010position\030\001 \002(\0132\036.dk.au.per",
       "pos.tailing.Position\022\021\n\tdirection\030\002 \002(\001\022" +
-      "\r\n\005speed\030\003 \002(\001\"C\n\005Agent\022\014\n\004name\030\001 \002(\t\022,\n" +
-      "\006person\030\002 \002(\0132\034.dk.au.perpos.tailing.Per" +
-      "son\"6\n\006Target\022,\n\006person\030\001 \002(\0132\034.dk.au.pe" +
-      "rpos.tailing.Person\"p\n\007MapArea\0221\n\tupperL" +
-      "eft\030\001 \002(\0132\036.dk.au.perpos.tailing.Positio" +
-      "n\0222\n\nlowerRight\030\002 \002(\0132\036.dk.au.perpos.tai" +
-      "ling.Position\"\027\n\007MapData\022\014\n\004data\030\001 \002(\014\"\301" +
-      "\001\n\014AgentMessage\022,\n\006target\030\001 \001(\0132\034.dk.au." +
-      "perpos.tailing.Target\022*\n\003map\030\002 \001(\0132\035.dk.",
-      "au.perpos.tailing.MapData\022*\n\005reply\030\003 \001(\013" +
-      "2\033.dk.au.perpos.tailing.Reply\022+\n\006agents\030" +
-      "\004 \003(\0132\033.dk.au.perpos.tailing.Agent\"\225\001\n\rS" +
-      "erverMessage\022*\n\005login\030\001 \001(\0132\033.dk.au.perp" +
-      "os.tailing.Login\022,\n\006target\030\002 \001(\0132\034.dk.au" +
-      ".perpos.tailing.Target\022*\n\003map\030\003 \001(\0132\035.dk" +
-      ".au.perpos.tailing.MapArea\"\226\001\n\016ManagerMe" +
-      "ssage\022*\n\005reply\030\001 \001(\0132\033.dk.au.perpos.tail" +
-      "ing.Reply\022*\n\005agent\030\002 \001(\0132\033.dk.au.perpos." +
-      "tailing.Agent\022,\n\006target\030\003 \001(\0132\034.dk.au.pe",
-      "rpos.tailing.Target"
+      "\r\n\005speed\030\003 \002(\001\"\250\001\n\020IdentifiedPerson\022,\n\006p" +
+      "erson\030\001 \002(\0132\034.dk.au.perpos.tailing.Perso" +
+      "n\022\014\n\004name\030\002 \002(\t\0229\n\004type\030\003 \002(\0162+.dk.au.pe" +
+      "rpos.tailing.IdentifiedPerson.Type\"\035\n\004Ty" +
+      "pe\022\t\n\005Agent\020\001\022\n\n\006Target\020\002\"C\n\005Agent\022\014\n\004na" +
+      "me\030\001 \002(\t\022,\n\006person\030\002 \002(\0132\034.dk.au.perpos." +
+      "tailing.Person\"6\n\006Target\022,\n\006person\030\001 \002(\013" +
+      "2\034.dk.au.perpos.tailing.Person\"p\n\007MapAre" +
+      "a\0221\n\tupperLeft\030\001 \002(\0132\036.dk.au.perpos.tail",
+      "ing.Position\0222\n\nlowerRight\030\002 \002(\0132\036.dk.au" +
+      ".perpos.tailing.Position\"\027\n\007MapData\022\014\n\004d" +
+      "ata\030\001 \002(\014\"\301\001\n\014AgentMessage\022,\n\006target\030\001 \001" +
+      "(\0132\034.dk.au.perpos.tailing.Target\022*\n\003map\030" +
+      "\002 \001(\0132\035.dk.au.perpos.tailing.MapData\022*\n\005" +
+      "reply\030\003 \001(\0132\033.dk.au.perpos.tailing.Reply" +
+      "\022+\n\006agents\030\004 \003(\0132\033.dk.au.perpos.tailing." +
+      "Agent\"\225\001\n\rServerMessage\022*\n\005login\030\001 \001(\0132\033" +
+      ".dk.au.perpos.tailing.Login\022,\n\006target\030\002 " +
+      "\001(\0132\034.dk.au.perpos.tailing.Target\022*\n\003map",
+      "\030\003 \001(\0132\035.dk.au.perpos.tailing.MapArea\"\226\001" +
+      "\n\016ManagerMessage\022*\n\005reply\030\001 \001(\0132\033.dk.au." +
+      "perpos.tailing.Reply\022*\n\005agent\030\002 \001(\0132\033.dk" +
+      ".au.perpos.tailing.Agent\022,\n\006target\030\003 \001(\013" +
+      "2\034.dk.au.perpos.tailing.Target"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4762,8 +5242,16 @@ public final class TailingAgent {
               new java.lang.String[] { "Position", "Direction", "Speed", },
               dk.au.perpos.tailing.TailingAgent.Person.class,
               dk.au.perpos.tailing.TailingAgent.Person.Builder.class);
-          internal_static_dk_au_perpos_tailing_Agent_descriptor =
+          internal_static_dk_au_perpos_tailing_IdentifiedPerson_descriptor =
             getDescriptor().getMessageTypes().get(5);
+          internal_static_dk_au_perpos_tailing_IdentifiedPerson_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_dk_au_perpos_tailing_IdentifiedPerson_descriptor,
+              new java.lang.String[] { "Person", "Name", "Type", },
+              dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.class,
+              dk.au.perpos.tailing.TailingAgent.IdentifiedPerson.Builder.class);
+          internal_static_dk_au_perpos_tailing_Agent_descriptor =
+            getDescriptor().getMessageTypes().get(6);
           internal_static_dk_au_perpos_tailing_Agent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Agent_descriptor,
@@ -4771,7 +5259,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.Agent.class,
               dk.au.perpos.tailing.TailingAgent.Agent.Builder.class);
           internal_static_dk_au_perpos_tailing_Target_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_dk_au_perpos_tailing_Target_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_Target_descriptor,
@@ -4779,7 +5267,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.Target.class,
               dk.au.perpos.tailing.TailingAgent.Target.Builder.class);
           internal_static_dk_au_perpos_tailing_MapArea_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_dk_au_perpos_tailing_MapArea_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_MapArea_descriptor,
@@ -4787,7 +5275,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.MapArea.class,
               dk.au.perpos.tailing.TailingAgent.MapArea.Builder.class);
           internal_static_dk_au_perpos_tailing_MapData_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_dk_au_perpos_tailing_MapData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_MapData_descriptor,
@@ -4795,7 +5283,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.MapData.class,
               dk.au.perpos.tailing.TailingAgent.MapData.Builder.class);
           internal_static_dk_au_perpos_tailing_AgentMessage_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_dk_au_perpos_tailing_AgentMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_AgentMessage_descriptor,
@@ -4803,7 +5291,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.AgentMessage.class,
               dk.au.perpos.tailing.TailingAgent.AgentMessage.Builder.class);
           internal_static_dk_au_perpos_tailing_ServerMessage_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_dk_au_perpos_tailing_ServerMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_ServerMessage_descriptor,
@@ -4811,7 +5299,7 @@ public final class TailingAgent {
               dk.au.perpos.tailing.TailingAgent.ServerMessage.class,
               dk.au.perpos.tailing.TailingAgent.ServerMessage.Builder.class);
           internal_static_dk_au_perpos_tailing_ManagerMessage_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_dk_au_perpos_tailing_ManagerMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_dk_au_perpos_tailing_ManagerMessage_descriptor,
