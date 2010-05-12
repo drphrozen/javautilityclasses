@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ProjectCourseTemplate
+Bundle-SymbolicName: dk.au.perpos.course.template
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Team A
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: dk.au.perpos.core,
+ dk.au.perpos.core.events,
+ dk.au.perpos.core.predicates,
+ dk.au.perpos.core.util,
+ dk.au.perpos.core.util.osgi,
+ dk.au.perpos.core.util.programming,
+ dk.au.perpos.sensing,
+ dk.au.perpos.sensing.configuration,
+ dk.au.perpos.sensing.measurements,
+ dk.au.perpos.sensing.measurements.gps,
+ dk.au.perpos.sensing.measurements.wifi,
+ dk.au.perpos.sensing.predicates,
+ dk.au.perpos.spatialsupport.locationmodel,
+ dk.au.perpos.spatialsupport.position,
+ dk.au.perpos.spatialsupport.position.transformation,
+ dk.au.perpos.spatialsupport.routefinding
+Service-Component: OSGI-INF/ProjectComponent.xml
+Bundle-ClassPath: lib/protobuf-java-2.3.0.jar,
+ .
