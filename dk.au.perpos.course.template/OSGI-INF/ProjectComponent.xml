@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.au.perpos.course.template">
+   <implementation class="dk.au.perpos.course.ProjectComponent"/>
+   <reference bind="setSensingService" cardinality="1..1" interface="dk.au.perpos.sensing.SensingService" name="SensingService" policy="dynamic" unbind="removeSensingService"/>
+   <reference bind="setLocationModelService" cardinality="1..1" interface="dk.au.perpos.spatialsupport.locationmodel.LocationModelService" name="LocationModelService" policy="dynamic" unbind="removeLocationModelService"/>
+</scr:component>

@@ -1,0 +1,100 @@
+package dk.au.perpos.tailing;
+
+message Msg
+{
+	required fixed32 id = 1;
+}
+
+message Login
+{
+	enum Type
+	{
+		Agent  = 0;
+		Manager = 1;
+		AgentCallback = 2;
+		ManagerCallback = 3;
+	}
+	required string name = 1;
+	required Type clientType = 2;
+}
+
+message Reply
+{
+	enum Answer
+	{
+		Ok = 0;
+		NotOk = 1;
+	}
+	required Answer answer = 1;
+	optional string text = 2;
+}
+
+message Position
+{
+	required double longitude = 1;
+	required double latitude = 2;
+	optional double altitude = 3;
+}
+
+message Person
+{
+	required Position position = 1;
+	required double direction = 2;
+	required double speed = 3;
+}
+
+message IdentifiedPerson
+{
+	required Person person = 1;
+	required string name = 2;
+	enum Type
+	{
+		Agent = 1;
+		Target = 2;
+	}
+	required Type type = 3;
+}
+
+message Agent
+{
+	required string name = 1;
+	required Person person = 2;
+}
+
+message Target
+{
+	required Person person = 1;
+}
+
+message MapArea
+{
+	required Position upperLeft = 1;
+	required Position lowerRight = 2;
+}
+
+message MapData
+{
+	required bytes data = 1;
+}
+
+message AgentMessage
+{
+	optional Target target = 1;
+	optional MapData map = 2;
+	optional Reply reply = 3;
+	repeated Agent agents = 4;
+}
+
+message ServerMessage
+{
+	optional Login login = 1;
+	optional Target target = 2;
+	optional MapArea map = 3;
+}
+
+message ManagerMessage
+{
+	optional Reply reply = 1;
+	optional Agent agent = 2;
+	optional Target target = 3;
+}
