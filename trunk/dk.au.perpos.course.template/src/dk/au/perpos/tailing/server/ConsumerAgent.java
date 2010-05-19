@@ -7,15 +7,21 @@ import dk.au.perpos.sensing.measurements.Measurement;
 import dk.au.perpos.sensing.measurements.gps.GPSMeasurement;
 import dk.au.perpos.spatialsupport.position.WGS84Position;
 import dk.au.perpos.tailing.TailingAgent.Agent;
+import dk.au.perpos.tailing.TailingAgent.AgentInfo;
 import dk.au.perpos.tailing.TailingAgent.ManagerMessage;
 import dk.au.perpos.tailing.TailingAgent.Person;
 import dk.au.perpos.tailing.TailingAgent.Position;
+import dk.au.perpos.tailing.TailingAgent.TargetSeen;
+import dk.au.perpos.tailing.server.MessagePublisher.MessageSubscriber;
 
-public class ConsumerAgent implements Consumer<Measurement> {
+public class ConsumerAgent implements Consumer<Measurement>, MessageSubscriber<TargetSeen> {
 
 	private final Agent agentProto;
 	private final MessagePublisher publisher;
 	private final Logger log = Logger.getLogger(ConsumerAgent.class.getName());
+	
+	private final Object sync = new Object();
+	private AgentInfo.Builder agentInfoBuilder = null;
 
 	public ConsumerAgent(String name) {
 		agentProto = Agent.newBuilder().setName(name).buildPartial();
@@ -43,7 +49,23 @@ public class ConsumerAgent implements Consumer<Measurement> {
 				.build())
 			.build())
 		.build();
-		publisher.Publish(ManagerMessage.newBuilder().setAgent(tmp).build());
+		AgentInfo agentInfo;
+		synchronized (sync) {
+			agentInfoBuilder = AgentInfo.newBuilder().setAgent(tmp);
+			agentInfo = agentInfoBuilder.build();
+		}
+		publisher.Publish(ManagerMessage.newBuilder().addAgent(agentInfo).build());
+	}
+
+	@Override
+	public void OnSignal(TargetSeen value) {
+		AgentInfo agentInfo = null;
+		synchronized (sync) {
+			if(agentInfoBuilder != null)
+				agentInfo = agentInfoBuilder.setTargetSeen(value).build();
+		}
+		if(agentInfo != null)
+			publisher.Publish(ManagerMessage.newBuilder().addAgent(agentInfo).build());
 	}
 
 }

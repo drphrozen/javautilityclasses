@@ -3,18 +3,8 @@ package dk.au.perpos.tailing.server;
 import dk.au.perpos.tailing.TailingAgent.Agent;
 import dk.au.perpos.tailing.TailingAgent.Person;
 import dk.au.perpos.tailing.TailingAgent.Position;
-import dk.au.perpos.tailing.TailingAgent.Target;
 
 public class MessageWrapper {
-	/**
-	 * Creates a Target.
-	 * @return A new Target.
-	 */
-	public static Target createTarget(Person person) {
-		return Target.newBuilder()
-			.setPerson(person)
-			.build();
-	}
 	
 	/**
 	 * Creates a Person. 
