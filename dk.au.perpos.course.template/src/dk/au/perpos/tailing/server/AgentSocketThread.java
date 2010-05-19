@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
+import dk.au.perpos.tailing.TailingAgent.TargetSeen;
 
 public class AgentSocketThread extends SocketThread {
 
@@ -19,8 +20,9 @@ public class AgentSocketThread extends SocketThread {
 		while(isRunning) {
 			try {
 				ServerMessage message = ServerMessage.parseDelimitedFrom(clientSocket.getInputStream());
-				if(message.hasTarget()) {
-//					Target target = message.getTarget();
+				if(message.hasTargetSeen()) {
+					TargetSeen targetSeen = message.getTargetSeen();
+					MessagePublisher.instance.Publish(targetSeen);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
