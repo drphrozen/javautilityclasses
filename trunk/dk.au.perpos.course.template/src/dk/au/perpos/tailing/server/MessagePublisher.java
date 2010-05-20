@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.logging.Logger;
 
 import com.google.protobuf.GeneratedMessage;
 
@@ -18,7 +17,7 @@ public class MessagePublisher {
 	}
 
 	public static final MessagePublisher instance = new MessagePublisher();
-	private final Logger log = Logger.getLogger(MessagePublisher.class.getName());
+//	private final Logger log = Logger.getLogger(MessagePublisher.class.getName());
 	private final BlockingQueue<GeneratedMessage> queue = new ArrayBlockingQueue<GeneratedMessage>(20);
 	private final HashMap<Class<? extends GeneratedMessage>, List<MessageSubscriber>> signalListenersMap = new HashMap<Class<? extends GeneratedMessage>, List<MessageSubscriber>>();
 	
