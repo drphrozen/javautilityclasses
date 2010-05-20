@@ -1,0 +1,35 @@
+<resources>
+
+    <string-array name="camels">
+        <item>camel00</item>
+        <item>camel01</item>
+        <item>camel02</item>
+        <item>camel03</item>
+        <item>camel04</item>
+        <item>camel05</item>
+        <item>camel06</item>
+        <item>camel08</item>
+        <item>camel09</item>
+        <item>camel10</item>
+        <item>camel11</item>
+        <item>camel12</item>
+        <item>camel13</item>
+        <item>camel14</item>
+        <item>camel15</item>
+        <item>camel16</item>
+        <item>camel18</item>
+        <item>camel19</item>
+        <item>camel20</item>
+        <item>camel21</item>
+        <item>camel22</item>
+        <item>camel23</item>
+        <item>camel24</item>
+        <item>camel25</item>
+        <item>camel26</item>
+        <item>camel28</item>
+        <item>camel29</item>
+        <item>camel30</item>
+        <item>camel31</item>
+    </string-array>
+    
+</resources>
