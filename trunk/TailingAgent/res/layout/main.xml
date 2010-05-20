@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-
-<Spinner android:id="@+id/Spinner01" android:layout_height="wrap_content" android:layout_width="fill_parent"></Spinner><EditText android:id="@+id/EditText01" android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="numberSigned" android:text="15340"></EditText><Button android:id="@+id/Button01" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Connect"></Button>
-
-
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TableLayout android:stretchColumns="0,1" android:layout_width="fill_parent" android:layout_height="wrap_content"> 
+		<TableRow>
+			<Spinner android:id="@+id/SpinnerCamel"></Spinner>
+			<EditText android:inputType="numberSigned"
+				android:text="15340" android:id="@+id/EditTextPort"></EditText>
+		</TableRow>
+		<Button android:text="Connect" android:layout_span="2" android:id="@+id/ButtonConnect"></Button>
+	</TableLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_weight="0.5">
+			<Button android:text="5" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/Button5"></Button>
+			<Button android:text="50" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/Button50"></Button>
+			<Button android:text="100" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/Button100"></Button>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:layout_weight="0.5">
+			<Button android:text="25" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/Button25"></Button>
+			<Button android:text="75" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/Button75"></Button>
+			<Button android:text="Gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/ButtonGone"></Button>
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>

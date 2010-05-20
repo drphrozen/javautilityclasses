@@ -33,18 +33,18 @@ public class TailingAgent extends Activity {
 			camelID = savedInstanceState.getInt(STATE_CAMELID);
 			CharSequence port = savedInstanceState.getCharSequence(STATE_PORT);
 			if(port != null)
-				((EditText) findViewById(R.id.EditText01)).setText(port);
+				((EditText) findViewById(R.id.EditTextPort)).setText(port);
 		} else {
       // Restore preferences
       SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 			camelID = settings.getInt(STATE_CAMELID, 0);
 			CharSequence port = settings.getString(STATE_PORT, null);
 			if(port != null)
-				((EditText) findViewById(R.id.EditText01)).setText(port);
+				((EditText) findViewById(R.id.EditTextPort)).setText(port);
 		}
 		
 		// SPINNER
-		final Spinner s = (Spinner) findViewById(R.id.Spinner01);
+		final Spinner s = (Spinner) findViewById(R.id.SpinnerCamel);
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
             this, R.array.camels, android.R.layout.simple_spinner_item);
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -55,14 +55,51 @@ public class TailingAgent extends Activity {
     	
     }
 		
-    // BUTTON
-		findViewById(R.id.Button01).setOnClickListener(new OnClickListener() {
+    
+    findViewById(R.id.Button5).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(5);
+			}
+		});
+    
+    findViewById(R.id.Button25).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(25);
+			}
+		});
+    
+    findViewById(R.id.Button50).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(50);
+			}
+		});
+    
+    findViewById(R.id.Button75).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(75);
+			}
+		});
+    
+    findViewById(R.id.Button100).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(100);
+			}
+		});
+    
+    findViewById(R.id.ButtonGone).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				updateTargetSeen(-1);
+			}
+		});
+    
+    // Connect BUTTON
+		findViewById(R.id.ButtonConnect).setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				final String hostName;
 				final int port;
 
-				String portString = ((EditText) findViewById(R.id.EditText01)).getText().toString();
+				String portString = ((EditText) findViewById(R.id.EditTextPort)).getText().toString();
 				hostName = (CharSequence)s.getSelectedItem() + ".cs.au.dk";
 				int tmpPort = -1;
 				try {
@@ -73,45 +110,15 @@ public class TailingAgent extends Activity {
 				}
 				port = tmpPort;
 
-				perpos = new PerPos(TailingAgent.this, hostName, port);
-//				SensingService service = perpos.getSensingService();
-				
+				perpos = new PerPos(TailingAgent.this, hostName, port);				
 				perpos.startGPS();
 				perpos.startRelay();
-//				perpos.startWiFi();
-				
-//				MeasurementProducer<Measurement> producer = null;
-//				Sensor sensor = perpos.getSensingService().findFirstSensor(
-//						new Any());
-//				if (sensor != null) {
-//					producer = perpos.getSensingService().getProducer(sensor);
-//					producer.addConsumer(new Consumer<Measurement>() {
-//
-//						public void consume(Measurement m) {
-//							if (m instanceof WiFiMeasurement) {
-//								WiFiMeasurement wm = (WiFiMeasurement) m;
-//								toast("Received WiFi measurement [x: "
-//										+ wm.getX() + ", y: " + wm.getY()
-//										+ ", z: " + wm.getZ() + ", symID: "
-//										+ wm.getSymbolicID() + ", time: "
-//										+ wm.getTimeOfMeasurement() + "]");
-//							} else if (m instanceof GPSMeasurement) {
-//								GPSMeasurement gm = (GPSMeasurement) m;
-//								toast("Received GPS measurement [lat: "
-//										+ gm.getPosition().getLatitude()
-//										+ ", lon: "
-//										+ gm.getPosition().getLongitude()
-//										+ ", time: "
-//										+ gm.getTimeOfMeasurement() + "]");
-//							} else {
-//								toast("Unknown measurement "
-//										+ m.getTimeOfMeasurement());
-//							}
-//						}
-//					});
-//				}
 			}
 		});
+	}
+	
+	private static void updateTargetSeen(int distance) {
+		
 	}
 
 	protected void toast(String message) {
@@ -125,16 +132,16 @@ public class TailingAgent extends Activity {
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putInt(STATE_CAMELID, ((Spinner) findViewById(R.id.Spinner01)).getSelectedItemPosition());
-		outState.putCharSequence(STATE_PORT, ((EditText) findViewById(R.id.EditText01)).getText());
+		outState.putInt(STATE_CAMELID, ((Spinner) findViewById(R.id.SpinnerCamel)).getSelectedItemPosition());
+		outState.putCharSequence(STATE_PORT, ((EditText) findViewById(R.id.EditTextPort)).getText());
 		super.onSaveInstanceState(outState);
 	}
 	
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		((Spinner) findViewById(R.id.Spinner01)).setSelection(savedInstanceState.getInt(STATE_CAMELID));
-		((EditText) findViewById(R.id.EditText01)).setText(savedInstanceState.getCharSequence(STATE_PORT));
+		((Spinner) findViewById(R.id.SpinnerCamel)).setSelection(savedInstanceState.getInt(STATE_CAMELID));
+		((EditText) findViewById(R.id.EditTextPort)).setText(savedInstanceState.getCharSequence(STATE_PORT));
 	}
 
 	@Override
@@ -148,8 +155,8 @@ public class TailingAgent extends Activity {
     // make changes. All objects are from android.context.Context
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
-    editor.putInt(STATE_CAMELID, ((Spinner) findViewById(R.id.Spinner01)).getSelectedItemPosition());
-    editor.putString(STATE_PORT, ((EditText) findViewById(R.id.EditText01)).getText().toString());
+    editor.putInt(STATE_CAMELID, ((Spinner) findViewById(R.id.SpinnerCamel)).getSelectedItemPosition());
+    editor.putString(STATE_PORT, ((EditText) findViewById(R.id.EditTextPort)).getText().toString());
 		
     // Don't forget to commit your edits!!!
     editor.commit();
