@@ -1,8 +1,11 @@
 package dk.au.perpos.tailing.agent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -12,14 +15,19 @@ import android.widget.Toast;
 import dk.au.perpos.android.PerPos;
 
 public class TailingAgent extends Activity {
-	private PerPos perpos = null;
 	
+	private PerPos perpos = null;
+	private WakeLock wl;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TailingAgent.class.getName() + "WakeLock");
+		wl.acquire();
+		
 		int camelID;
 		if(savedInstanceState != null) {
 			camelID = savedInstanceState.getInt(STATE_CAMELID);
@@ -132,6 +140,9 @@ public class TailingAgent extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		
+		wl.release();
+
 		
     // Save user preferences. We need an Editor object to
     // make changes. All objects are from android.context.Context
