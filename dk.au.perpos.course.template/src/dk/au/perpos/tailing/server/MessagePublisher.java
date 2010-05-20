@@ -28,7 +28,7 @@ public class MessagePublisher {
 			while (true) {
 				try {
 					GeneratedMessage message = queue.take();
-					log.info(message.getClass().getName());
+					//log.info(message.getClass().getName());
 					synchronized (signalListenersMap) {
 						Class<? extends GeneratedMessage> key = message.getClass();
 						if (!signalListenersMap.containsKey(key))
@@ -80,7 +80,7 @@ public class MessagePublisher {
 	}
 
 	public <T extends GeneratedMessage> boolean Publish(final T value) {
-		log.info(value.getClass().getName());
+		//log.info(value.getClass().getName());
 		return queue.add(value);
 	}
 }

@@ -2,41 +2,44 @@ package dk.au.perpos.tailing.server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.logging.Logger;
 
 import dk.au.perpos.tailing.TailingAgent.ManagerMessage;
 import dk.au.perpos.tailing.server.MessagePublisher.MessageSubscriber;
 
 public class ManagerSocketThread extends SocketThread implements MessageSubscriber<ManagerMessage> {
 
-	private final Object sync = new Object();
-	private volatile ManagerMessage message;
+	private final Logger log = Logger.getLogger(ManagerSocketThread.class.getName());
+	private final ArrayBlockingQueue<ManagerMessage> queue = new ArrayBlockingQueue<ManagerMessage>(10);
 	
 	public ManagerSocketThread(Socket clientSocket, String name) {
 		super(clientSocket, name, null);
+		MessagePublisher.instance.addMessageSubscriber(this, ManagerMessage.class);
 	}
 
 	@Override
 	public void process() {
 		while(true) {
-			synchronized (sync) {
-				try {
-					sync.wait();
-					message.writeDelimitedTo(clientSocket.getOutputStream());
-				} catch (InterruptedException e) {
-					break;
-				} catch (IOException e) {
-					e.printStackTrace();
-					break;
-				}
+			ManagerMessage message;
+			try {
+				log.info("Waiting for message");
+				message = queue.take();
+				log.info("Got Message");
+				message.writeDelimitedTo(clientSocket.getOutputStream());
+			} catch (InterruptedException e) {
+				break;
+			} catch (IOException e) {
+				e.printStackTrace();
+				break;
 			}
 		}
+		MessagePublisher.instance.removeMessageSubscriber(this, ManagerMessage.class);
 	}
 	
 	@Override
 	public void OnSignal(ManagerMessage value) {
-		synchronized (sync) {
-			message = value;
-			sync.notifyAll();
-		}
+		log.info("OnSignal");
+		queue.offer(value);
 	}
 }

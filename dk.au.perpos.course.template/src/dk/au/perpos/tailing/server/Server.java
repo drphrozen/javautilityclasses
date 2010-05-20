@@ -12,6 +12,7 @@ import dk.au.perpos.sensing.SensingService;
 import dk.au.perpos.sensing.Sensor;
 import dk.au.perpos.sensing.measurements.Measurement;
 import dk.au.perpos.sensing.measurements.MeasurementProducer;
+import dk.au.perpos.tailing.client.Phone;
 
 public class Server implements Runnable, EventHandler<ValueEventArgs<Sensor>> {
 
@@ -45,6 +46,9 @@ public class Server implements Runnable, EventHandler<ValueEventArgs<Sensor>> {
 		SocketThreadManager socketThreadManager = new SocketThreadManager();
 		log.info("The server is running..");
 		
+		Thread phoneSimThread = new Thread(new Phone());
+		phoneSimThread.start();
+		
 		isRunning = true;
 		while (isRunning) {
 			try {
@@ -53,6 +57,8 @@ public class Server implements Runnable, EventHandler<ValueEventArgs<Sensor>> {
 				e.printStackTrace();
 			}
 		}
+		
+		phoneSimThread.interrupt();
 		
 		MessagePublisher.instance.stop();
 		log.info("The server was shutdown!");
