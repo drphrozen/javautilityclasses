@@ -6,7 +6,7 @@ message Login
 	{
 		Agent  = 0;
 		Manager = 1;
-//		AgentCallback = 2;
+//		AgentCallback = 2; 
 //		ManagerCallback = 3;
 	}
 	required string name = 1;
