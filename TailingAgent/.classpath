@@ -4,5 +4,10 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/PerPosDroidLibrary.jar"/>
+	<classpathentry kind="lib" path="lib/protobuf-java-2.3.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://code.google.com/intl/da/apis/protocolbuffers/docs/reference/java/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
