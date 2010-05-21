@@ -79,7 +79,6 @@ public class MessagePublisher {
 	}
 
 	public <T extends GeneratedMessage> boolean Publish(final T value) {
-		//log.info(value.getClass().getName());
-		return queue.add(value);
+		return queue.offer(value);
 	}
 }
