@@ -3,7 +3,7 @@
 	package="dk.au.perpos.tailing.agent" android:versionCode="1"
 	android:versionName="1.0">
 	<application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
-		<activity android:name=".TailingAgent" android:label="@string/app_name" android:alwaysRetainTaskState="true" android:launchMode="singleInstance" android:finishOnCloseSystemDialogs="true">
+		<activity android:name=".TailingAgent" android:label="@string/app_name" android:alwaysRetainTaskState="true" android:launchMode="singleInstance" android:finishOnCloseSystemDialogs="true" android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

@@ -6,9 +6,7 @@ import java.net.UnknownHostException;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.widget.Toast;
-
 import dk.au.perpos.tailing.TailingAgent.Login;
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
 import dk.au.perpos.tailing.TailingAgent.TargetSeen;
@@ -44,20 +42,15 @@ public class TargetSeenSender implements Runnable {
 	public void login(String hostName, int port) {
 		try {
 			socket = new Socket(hostName, port);
-			ServerMessage message = ServerMessage.newBuilder()
-				.setLogin(Login.newBuilder()
-					.setName(imei)
-					.setClientType(Type.Agent)
-				.build())
+			Login login = Login.newBuilder()
+				.setName(imei + "GPS")
+				.setClientType(Type.Agent)
 			.build();
-			Log.i(TargetSeenSender.class.getName(), message.toString());
-			message.writeDelimitedTo(socket.getOutputStream());
+			login.writeDelimitedTo(socket.getOutputStream());
 		} catch (UnknownHostException e) {
-			toast("Unknown host: " + hostName + "!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			socket = null;
-			toast(e.getMessage());
 			e.printStackTrace();
 		}
 	}

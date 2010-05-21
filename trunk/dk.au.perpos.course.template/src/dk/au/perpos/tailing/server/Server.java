@@ -80,7 +80,9 @@ public class Server implements Runnable, EventHandler<ValueEventArgs<Sensor>> {
 		String id = sensor.getId();
 		log.info("Added sensor with ID: " + id);
 		MeasurementProducer<Measurement> producer = sensingService.getProducer(sensor);
-		producer.addConsumer(new ConsumerAgent(id));
+		ConsumerAgent consumerAgent = new ConsumerAgent(id);
+		producer.addConsumer(consumerAgent);
+		new Thread(consumerAgent).run();
 	}
 
 	public static void main(String[] args) {

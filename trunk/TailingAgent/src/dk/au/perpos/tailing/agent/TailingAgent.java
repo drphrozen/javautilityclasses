@@ -2,7 +2,6 @@ package dk.au.perpos.tailing.agent;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -18,10 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import dk.au.perpos.android.PerPos;
-import dk.au.perpos.tailing.TailingAgent.Login;
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
 import dk.au.perpos.tailing.TailingAgent.TargetSeen;
-import dk.au.perpos.tailing.TailingAgent.Login.Type;
 
 public class TailingAgent extends Activity {
 	
@@ -49,9 +45,9 @@ public class TailingAgent extends Activity {
     // Restore preferences
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
     int camelID = settings.getInt(STATE_CAMELID, 0);
-		CharSequence port = settings.getString(STATE_PORT, null);
-		if(port != null)
-			((EditText) findViewById(R.id.EditTextPort)).setText(port);
+		CharSequence portString = settings.getString(STATE_PORT, null);
+		if(portString != null)
+			((EditText) findViewById(R.id.EditTextPort)).setText(portString);
 		
 		// SPINNER
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -102,19 +98,25 @@ public class TailingAgent extends Activity {
 		});
     
     // Connect BUTTON
+		final String hostName = getHostName();
+		final int port = getPort();
+		
 		findViewById(R.id.ButtonConnect).setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				final String hostName = getHostName();
-				final int port = getPort();
-				
-				TargetSeenSender sender = new TargetSeenSender(TailingAgent.this);
-				sender.login(hostName, port+1);
-				new Thread(sender).start();
-				
-				perpos = new PerPos(TailingAgent.this, hostName, port);				
-				perpos.startGPS();
-				perpos.startRelay();
+//				new Thread(new Runnable() {
+//					
+//					public void run() {
+//						Looper.prepare();
+						TargetSeenSender sender = new TargetSeenSender(TailingAgent.this);
+						sender.login(hostName, port+1);
+						new Thread(sender).start();
+						
+						perpos = new PerPos(TailingAgent.this, hostName, port);				
+						perpos.startGPS();
+						perpos.startRelay();
+//					}
+//				}).start();
 			}
 		});
 	}
@@ -135,7 +137,10 @@ public class TailingAgent extends Activity {
 	}
 	
 	private void updateTargetSeen(int distance) {
-		if(socket == null) return;
+		if(socket == null) {
+			toast("Update unsuccessful: Not connected!");
+			return;
+		}
 		try {
 			ServerMessage.newBuilder()
 				.setTargetSeen(TargetSeen.newBuilder()
