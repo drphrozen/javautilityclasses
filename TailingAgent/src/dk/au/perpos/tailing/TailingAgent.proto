@@ -48,6 +48,7 @@ message ServerMessage
 {
 	optional Login login = 1;
 	optional TargetSeen targetSeen = 2;
+	optional Agent agent = 3;
 }
 
 message TargetSeen

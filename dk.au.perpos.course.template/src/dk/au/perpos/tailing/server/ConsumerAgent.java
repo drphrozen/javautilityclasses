@@ -3,8 +3,6 @@ package dk.au.perpos.tailing.server;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Logger;
 
-import javax.swing.plaf.SliderUI;
-
 import dk.au.perpos.core.Consumer;
 import dk.au.perpos.sensing.measurements.Measurement;
 import dk.au.perpos.sensing.measurements.gps.GPSMeasurement;

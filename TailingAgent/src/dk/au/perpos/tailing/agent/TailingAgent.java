@@ -6,6 +6,9 @@ import java.net.Socket;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -19,7 +22,7 @@ import dk.au.perpos.android.PerPos;
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
 import dk.au.perpos.tailing.TailingAgent.TargetSeen;
 
-public class TailingAgent extends Activity {
+public class TailingAgent extends Activity implements LocationListener {
 	
 	private static final String PREFS_NAME = "TailingAgentPrefsFile";
 	private static final String STATE_CAMELID = "camelID"; 
@@ -41,6 +44,8 @@ public class TailingAgent extends Activity {
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TailingAgent.class.getName() + "WakeLock");
 		wl.acquire();
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, this);
 		
     // Restore preferences
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -181,5 +186,21 @@ public class TailingAgent extends Activity {
 		if(perpos != null)
 			perpos.shutdown();
 		finish();
+	}
+
+	public void onLocationChanged(Location location) {
+		
+	}
+
+	public void onProviderDisabled(String provider) {
+		
+	}
+
+	public void onProviderEnabled(String provider) {
+		
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		
 	}
 }
