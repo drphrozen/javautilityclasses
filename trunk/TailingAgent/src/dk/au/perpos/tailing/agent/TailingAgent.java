@@ -2,6 +2,7 @@ package dk.au.perpos.tailing.agent;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -32,6 +34,7 @@ public class TailingAgent extends Activity implements LocationListener {
 	private Socket socket = null;
 	private WakeLock wl;
 	private Spinner spinnerCamel;
+	private ServerProtocol targetSeenSender = null;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,7 +48,7 @@ public class TailingAgent extends Activity implements LocationListener {
 		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TailingAgent.class.getName() + "WakeLock");
 		wl.acquire();
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, this);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
 		
     // Restore preferences
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -109,19 +112,20 @@ public class TailingAgent extends Activity implements LocationListener {
 		findViewById(R.id.ButtonConnect).setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-//				new Thread(new Runnable() {
-//					
-//					public void run() {
-//						Looper.prepare();
-						TargetSeenSender sender = new TargetSeenSender(TailingAgent.this);
-						sender.login(hostName, port+1);
-						new Thread(sender).start();
-						
-						perpos = new PerPos(TailingAgent.this, hostName, port);				
-						perpos.startGPS();
-						perpos.startRelay();
-//					}
-//				}).start();
+				String imei = ((TelephonyManager) TailingAgent.this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+				try {
+					targetSeenSender = new ServerProtocol(hostName, port, imei);
+					new Thread(targetSeenSender).start();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+//				perpos = new PerPos(TailingAgent.this, hostName, port);				
+//				perpos.startGPS();
+//				perpos.startRelay();
 			}
 		});
 	}
@@ -185,11 +189,14 @@ public class TailingAgent extends Activity implements LocationListener {
 	public void onBackPressed() {
 		if(perpos != null)
 			perpos.shutdown();
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		lm.removeUpdates(this);
 		finish();
 	}
 
 	public void onLocationChanged(Location location) {
-		
+		if(targetSeenSender != null)
+			targetSeenSender.sendLocation(location);
 	}
 
 	public void onProviderDisabled(String provider) {
