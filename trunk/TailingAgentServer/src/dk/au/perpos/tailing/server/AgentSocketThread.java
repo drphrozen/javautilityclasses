@@ -6,20 +6,16 @@ import java.net.Socket;
 import dk.au.perpos.tailing.TailingAgent.Agent;
 import dk.au.perpos.tailing.TailingAgent.AgentInfo;
 import dk.au.perpos.tailing.TailingAgent.ManagerMessage;
-import dk.au.perpos.tailing.TailingAgent.Person;
-import dk.au.perpos.tailing.TailingAgent.Position;
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
-import dk.au.perpos.tailing.TailingAgent.TargetSeen;
 
 public class AgentSocketThread extends SocketThread {
 
 	private boolean isRunning; 
 	private final MessagePublisher publisher = MessagePublisher.instance;
-	private final Agent agentProto;
+	private Agent agent = null;
 	
 	public AgentSocketThread(Socket clientSocket, String name) {
 		super(clientSocket, name, null);
-		agentProto = Agent.newBuilder().setName(name).buildPartial();
 	}
 
 	@Override
@@ -30,27 +26,17 @@ public class AgentSocketThread extends SocketThread {
 				ServerMessage message = ServerMessage.parseDelimitedFrom(clientSocket.getInputStream());
 				if(message == null)
 					break;
-				if(message.hasTargetSeen()) {
+				if(message.hasTargetSeen() && agent != null) {
 					publisher.Publish(ManagerMessage.newBuilder()
 						.addAgent(AgentInfo.newBuilder()
-							.setAgent(Agent.newBuilder(agentProto)
-								.setPerson(Person.newBuilder()
-									.setDirection(0)
-									.setSpeed(0)
-									.setPosition(Position.newBuilder()
-										.setAltitude(0)
-										.setLatitude(0)
-										.setLongitude(0)
-									.build())
-								.build())
-							.build())
+							.setAgent(agent)
 						.setTargetSeen(message.getTargetSeen())
 						.build())
 					.build());
 				}
 				if(message.hasAgent()) {
-					// TODO!!!
-					publisher.Publish(message.getAgent());
+					agent = message.getAgent();
+					publisher.Publish(agent);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
