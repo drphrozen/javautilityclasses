@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import dk.au.perpos.android.PerPos;
 import dk.au.perpos.tailing.TailingAgent.ServerMessage;
 import dk.au.perpos.tailing.TailingAgent.TargetSeen;
 
@@ -30,7 +29,7 @@ public class TailingAgent extends Activity implements LocationListener {
 	private static final String STATE_CAMELID = "camelID"; 
 	private static final String STATE_PORT = "port"; 
 	
-	private PerPos perpos = null;
+//	private PerPos perpos = null;
 	private Socket socket = null;
 	private WakeLock wl;
 	private Spinner spinnerCamel;
@@ -187,8 +186,8 @@ public class TailingAgent extends Activity implements LocationListener {
 	
 	@Override
 	public void onBackPressed() {
-		if(perpos != null)
-			perpos.shutdown();
+//		if(perpos != null)
+//			perpos.shutdown();
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.removeUpdates(this);
 		finish();
