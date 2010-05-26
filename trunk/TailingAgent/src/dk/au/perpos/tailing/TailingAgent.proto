@@ -72,4 +72,5 @@ message ManagerMessage
 {
 	repeated AgentInfo agent = 1;
 	optional Person target = 2;
+	required uint64 timestamp = 3;  
 }

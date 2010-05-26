@@ -1,7 +1,6 @@
 package dk.au.perpos.tailing.agent;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 import android.app.Activity;
@@ -20,8 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import dk.au.perpos.tailing.TailingAgent.ServerMessage;
-import dk.au.perpos.tailing.TailingAgent.TargetSeen;
 
 public class TailingAgent extends Activity implements LocationListener {
 	
@@ -30,10 +27,11 @@ public class TailingAgent extends Activity implements LocationListener {
 	private static final String STATE_PORT = "port"; 
 	
 //	private PerPos perpos = null;
-	private Socket socket = null;
 	private WakeLock wl;
 	private Spinner spinnerCamel;
-	private ServerProtocol targetSeenSender = null;
+	private ServerProtocol serverProtocol = null;
+	private LocationManager lm;
+
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -46,7 +44,7 @@ public class TailingAgent extends Activity implements LocationListener {
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TailingAgent.class.getName() + "WakeLock");
 		wl.acquire();
-		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
 		
     // Restore preferences
@@ -113,18 +111,15 @@ public class TailingAgent extends Activity implements LocationListener {
 			public void onClick(View v) {
 				String imei = ((TelephonyManager) TailingAgent.this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 				try {
-					targetSeenSender = new ServerProtocol(hostName, port, imei);
-					new Thread(targetSeenSender).start();
+					serverProtocol = new ServerProtocol(hostName, port, imei);
+					new Thread(serverProtocol).start();
 				} catch (UnknownHostException e) {
+					Toast.makeText(TailingAgent.this, e.getMessage(), Toast.LENGTH_LONG);
 					e.printStackTrace();
 				} catch (IOException e) {
+					Toast.makeText(TailingAgent.this, e.getMessage(), Toast.LENGTH_LONG);
 					e.printStackTrace();
 				}
-				
-				
-//				perpos = new PerPos(TailingAgent.this, hostName, port);				
-//				perpos.startGPS();
-//				perpos.startRelay();
 			}
 		});
 	}
@@ -139,32 +134,24 @@ public class TailingAgent extends Activity implements LocationListener {
 		try {
 			tmpPort = Integer.parseInt(portString); 
 		} catch (NumberFormatException e) {
-			Toast.makeText(TailingAgent.this, "Port could not be parsed!", Toast.LENGTH_LONG);
+			toast("Port could not be parsed!");
 		}
 		return tmpPort;
 	}
 	
 	private void updateTargetSeen(int distance) {
-		if(socket == null) {
+		if(serverProtocol == null) {
 			toast("Update unsuccessful: Not connected!");
 			return;
 		}
-		try {
-			ServerMessage.newBuilder()
-				.setTargetSeen(TargetSeen.newBuilder()
-					.setDirection(1.0f)
-					.setDistance(distance)
-				.build())
-			.build().writeDelimitedTo(socket.getOutputStream());
-		} catch (IOException e) {
-			socket = null;
-			toast(e.getMessage());
-			e.printStackTrace();
-		}
+		
+		Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		serverProtocol.sendTargetSeen(distance, l.getBearing());
 	}
 
 	protected void toast(String message) {
-		Toast.makeText(this, message, Toast.LENGTH_SHORT);
+		System.err.println(message);
+		Toast.makeText(TailingAgent.this, message, Toast.LENGTH_SHORT);
 	}
 	
 	@Override
@@ -194,8 +181,8 @@ public class TailingAgent extends Activity implements LocationListener {
 	}
 
 	public void onLocationChanged(Location location) {
-		if(targetSeenSender != null)
-			targetSeenSender.sendLocation(location);
+		if(serverProtocol != null)
+			serverProtocol.sendLocation(location);
 	}
 
 	public void onProviderDisabled(String provider) {
