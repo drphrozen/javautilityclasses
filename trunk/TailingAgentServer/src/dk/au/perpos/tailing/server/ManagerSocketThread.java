@@ -1,5 +1,7 @@
 package dk.au.perpos.tailing.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -11,10 +13,16 @@ public class ManagerSocketThread extends SocketThread implements MessageSubscrib
 
 //	private final Logger log = Logger.getLogger(ManagerSocketThread.class.getName());
 	private final ArrayBlockingQueue<ManagerMessage> queue = new ArrayBlockingQueue<ManagerMessage>(10);
+	private FileOutputStream stream = null;
 	
 	public ManagerSocketThread(Socket clientSocket, String name) {
 		super(clientSocket, name, null);
 		MessagePublisher.instance.addMessageSubscriber(this, ManagerMessage.class);
+		try {
+			stream = new FileOutputStream("Manager" + System.currentTimeMillis());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -26,6 +34,8 @@ public class ManagerSocketThread extends SocketThread implements MessageSubscrib
 				message = queue.take();
 //				log.info("Got Message");
 				message.writeDelimitedTo(clientSocket.getOutputStream());
+				if(stream != null)
+					message.writeDelimitedTo(stream);
 			} catch (InterruptedException e) {
 				break;
 			} catch (IOException e) {
@@ -33,6 +43,14 @@ public class ManagerSocketThread extends SocketThread implements MessageSubscrib
 				break;
 			}
 		}
+		if(stream != null) {
+			try {
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		MessagePublisher.instance.removeMessageSubscriber(this, ManagerMessage.class);
 	}
 	
