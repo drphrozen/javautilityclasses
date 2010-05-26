@@ -20,7 +20,7 @@ public class ServerProtocol implements Runnable {
 	private final Agent		agentProto;
 	
 	public ServerProtocol(String hostName, int port, String agentName) throws UnknownHostException, IOException {
-		agentProto = Agent.newBuilder().setName(agentName).build();
+		agentProto = Agent.newBuilder().setName(agentName).buildPartial();
 		
 		socket = new Socket(hostName, port);
 		Login.newBuilder()
