@@ -1,7 +1,7 @@
 package dk.au.perpos.tailing.agent;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import android.app.Activity;
 import android.content.Context;
@@ -45,7 +45,7 @@ public class TailingAgent extends Activity implements LocationListener {
 		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TailingAgent.class.getName() + "WakeLock");
 		wl.acquire();
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
     // Restore preferences
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -112,14 +112,11 @@ public class TailingAgent extends Activity implements LocationListener {
 				String imei = ((TelephonyManager) TailingAgent.this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 				try {
 					serverProtocol = new ServerProtocol(hostName, port, imei);
-					new Thread(serverProtocol).start();
-				} catch (UnknownHostException e) {
-					Toast.makeText(TailingAgent.this, e.getMessage(), Toast.LENGTH_LONG);
-					e.printStackTrace();
-				} catch (IOException e) {
-					Toast.makeText(TailingAgent.this, e.getMessage(), Toast.LENGTH_LONG);
+				} catch (FileNotFoundException e) {
+					toast(e.getMessage());
 					e.printStackTrace();
 				}
+				new Thread(serverProtocol).start();
 			}
 		});
 	}
