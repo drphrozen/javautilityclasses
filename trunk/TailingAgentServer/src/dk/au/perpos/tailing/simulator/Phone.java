@@ -37,7 +37,10 @@ public class Phone implements Runnable {
 				AgentInfo agentInfo = AgentInfo.newBuilder()
 					.setAgent(agent)
 				.build();
-				publisher.Publish(ManagerMessage.newBuilder().addAgent(agentInfo).build());
+				publisher.Publish(ManagerMessage.newBuilder()
+					.addAgent(agentInfo)
+					.setTimestamp(System.currentTimeMillis())
+				.build());
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
