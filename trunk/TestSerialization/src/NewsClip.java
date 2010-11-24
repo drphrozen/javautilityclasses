@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
+import dk.znz.serialization.SimpleSerializable;
+
 public class NewsClip implements SimpleSerializable, Serializable {
 
 	private static final long serialVersionUID = 2482783519399498054L;
@@ -64,7 +66,7 @@ public class NewsClip implements SimpleSerializable, Serializable {
 	}
 
 	@Override
-	public void write(DataOutputStream output) throws IOException {
+	public void serialize(DataOutputStream output) throws IOException {
 		output.writeUTF(mTitle);
 		output.writeUTF(mDescription);
 		output.writeUTF(mImageLocation);
@@ -74,7 +76,7 @@ public class NewsClip implements SimpleSerializable, Serializable {
 	}
 
 	@Override
-	public void read(DataInputStream input) throws IOException {
+	public void deserialize(DataInputStream input) throws IOException {
 		mTitle = input.readUTF();
 		mDescription = input.readUTF();
 		mImageLocation = input.readUTF();
