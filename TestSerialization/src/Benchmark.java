@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.zip.DeflaterOutputStream;
 
+import dk.znz.serialization.SimpleSerializable;
+import dk.znz.serialization.SimpleSerializer;
+
 public class Benchmark {
 
 	public static void main(String[] args) throws IOException {
@@ -42,19 +45,23 @@ public class Benchmark {
 		store.setClips(clips);
 		long nanos = System.nanoTime();
 		System.out.println("\nwriteSimpleSerializable");
-		writeSimpleSerializable(store);
+		for (int i = 0; i < 100; i++)
+			writeSimpleSerializable(store);
 		update(nanos);
 		nanos = System.nanoTime();
 		System.out.println("\nwriteObject");
-		writeObject(store);
+		for (int i = 0; i < 100; i++)
+			writeObject(store);
 		update(nanos);
 		nanos = System.nanoTime();
 		System.out.println("\nwriteCompressedSimpleSerializable");
-		writeCompressedSimpleSerializable(store);
+		for (int i = 0; i < 100; i++)
+			writeCompressedSimpleSerializable(store);
 		update(nanos);
 		nanos = System.nanoTime();
 		System.out.println("\nwriteCompressedObject");
-		writeCompressedObject(store);
+		for (int i = 0; i < 100; i++)
+			writeCompressedObject(store);
 		update(nanos);
 	}
 	
@@ -70,7 +77,7 @@ public class Benchmark {
 		ObjectOutputStream output = new ObjectOutputStream(byteArrayOutputStream);
 		output.writeObject(o);
 		output.flush();
-		System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
+		//System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
 	}
 
 	private static void writeCompressedObject(Object o) throws IOException {
@@ -80,21 +87,21 @@ public class Benchmark {
 		output.writeObject(o);
 		deflaterOutputStream.finish();
 		output.flush();
-		System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
+		//System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
 	}
 
 	private static void writeSimpleSerializable(SimpleSerializable o) throws IOException {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		SimpleSerializer.write(byteArrayOutputStream, o);
-		System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
+		SimpleSerializer.serialize(byteArrayOutputStream, o);
+		//System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
 	}
 
 	private static void writeCompressedSimpleSerializable(SimpleSerializable o) throws IOException {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		DeflaterOutputStream deflateOutput = new DeflaterOutputStream(byteArrayOutputStream);
-		SimpleSerializer.write(deflateOutput, o);
+		SimpleSerializer.serialize(deflateOutput, o);
 		deflateOutput.finish();
-		System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
+		//System.out.println(o.getClass().getSimpleName() + byteArrayOutputStream.toByteArray().length);
 	}
 }
 
@@ -131,14 +138,14 @@ class SimpleObject implements Serializable, SimpleSerializable {
 	}
 
 	@Override
-	public void write(DataOutputStream output) throws IOException {
+	public void serialize(DataOutputStream output) throws IOException {
 		output.writeInt(mIntenger);
 		output.writeFloat(mFloat);
 		output.writeByte(mByte);
 	}
 
 	@Override
-	public void read(DataInputStream input) throws IOException {
+	public void deserialize(DataInputStream input) throws IOException {
 		mIntenger = input.readInt();
 		mFloat = input.readFloat();
 		mByte = input.readByte();

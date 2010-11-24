@@ -2,6 +2,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import dk.znz.serialization.SimpleSerializable;
+
 public class SerializableObject implements SimpleSerializable {
 
   private String mString = "";
@@ -24,12 +26,12 @@ public class SerializableObject implements SimpleSerializable {
   }
 
   @Override
-  public void read(DataInputStream input) throws IOException {
+  public void deserialize(DataInputStream input) throws IOException {
     mString = input.readUTF();
   }
 
   @Override
-  public void write(DataOutputStream output) throws IOException {
+  public void serialize(DataOutputStream output) throws IOException {
     output.writeUTF(mString);
   }
 }
