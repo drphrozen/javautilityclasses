@@ -1,17 +1,17 @@
 package dk.znz.znk.terminal;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import gnu.io.DataBits;
-import gnu.io.StopBits;
-import gnu.io.Parity;
 import gnu.io.FlowControl;
+import gnu.io.Parity;
 import gnu.io.Speed;
+import gnu.io.StopBits;
+
+import java.awt.FlowLayout;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Settings extends JPanel {
 
@@ -42,36 +42,13 @@ public class Settings extends JPanel {
     JComboBox mSpeedComboBox = new JComboBox();
     mSpeedComboBox.setModel(new DefaultComboBoxModel(Speed.values()));
     mSpeedComboBox.setSelectedIndex(11);
-    GroupLayout groupLayout = new GroupLayout(this);
-    groupLayout.setHorizontalGroup(
-      groupLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(groupLayout.createSequentialGroup()
-          .addComponent(mPortTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(ComponentPlacement.RELATED)
-          .addComponent(mSpeedComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(ComponentPlacement.RELATED)
-          .addComponent(mDataBitsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(ComponentPlacement.RELATED)
-          .addComponent(mStopBitsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(ComponentPlacement.RELATED)
-          .addComponent(mParityComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(ComponentPlacement.RELATED)
-          .addComponent(mFlowControlComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-          .addContainerGap(116, Short.MAX_VALUE))
-    );
-    groupLayout.setVerticalGroup(
-      groupLayout.createParallelGroup(Alignment.LEADING)
-        .addGroup(groupLayout.createSequentialGroup()
-          .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-            .addComponent(mPortTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(mSpeedComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(mDataBitsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(mStopBitsComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(mParityComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(mFlowControlComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-          .addContainerGap(280, Short.MAX_VALUE))
-    );
-    setLayout(groupLayout);
+    setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    add(mPortTextField);
+    add(mSpeedComboBox);
+    add(mDataBitsComboBox);
+    add(mStopBitsComboBox);
+    add(mParityComboBox);
+    add(mFlowControlComboBox);
 
   }
 }
