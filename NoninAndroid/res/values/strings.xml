@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nonin Monitor</string>
+    <string name="error_no_pairs">Could not find any paired Nonin devices!</string>
+    <string name="error_no_bluetooth">Could not find a Bluetooth adapter!</string>
+</resources>
