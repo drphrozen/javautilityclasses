@@ -6,6 +6,17 @@ import java.util.List;
 
 public class Utils {
 
+  public static SerialPortInfo[] getSerialPorts()
+  {
+    SerialPortInfoFactory factory = SerialPortInfoFactory.getInstance();
+    List<CommPortIdentifier> identifiers = Utils.getPorts(PortType.PORT_SERIAL);
+    ArrayList<SerialPortInfo> serialPortInfos = new ArrayList<SerialPortInfo>();
+    for (CommPortIdentifier identifier : identifiers) {
+      serialPortInfos.add(factory.createSerialPortInfo(identifier.getName()));
+    }
+    return serialPortInfos.toArray(new SerialPortInfo[0]);
+  }
+  
   public static List<CommPortIdentifier> getPorts(PortType type) {
     @SuppressWarnings("unchecked") Enumeration<CommPortIdentifier> commPortIdentifiers = CommPortIdentifier.getPortIdentifiers();
     ArrayList<CommPortIdentifier> serialPorts = new ArrayList<CommPortIdentifier>();

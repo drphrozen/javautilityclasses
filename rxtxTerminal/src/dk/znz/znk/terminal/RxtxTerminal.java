@@ -2,6 +2,7 @@ package dk.znz.znk.terminal;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -14,7 +15,6 @@ public class RxtxTerminal {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Exception e) {
@@ -50,9 +50,13 @@ public class RxtxTerminal {
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		Settings settings = new Settings();
+		FlowLayout flowLayout = (FlowLayout) settings.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
 		frame.getContentPane().add(settings, BorderLayout.NORTH);
 		
 		Control control = new Control();
+		FlowLayout flowLayout_1 = (FlowLayout) control.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		frame.getContentPane().add(control, BorderLayout.SOUTH);
 	}
 

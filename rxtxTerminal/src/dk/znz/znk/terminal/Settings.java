@@ -1,11 +1,13 @@
 package dk.znz.znk.terminal;
 
+import gnu.io.CustomComboBox;
 import gnu.io.DataBits;
 import gnu.io.FlowControl;
 import gnu.io.Parity;
 import gnu.io.SerialPortInfo;
 import gnu.io.Speed;
 import gnu.io.StopBits;
+import gnu.io.Utils;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -17,14 +19,17 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Settings extends JPanel {
 
   private static final long serialVersionUID = 3493415047628642546L;
   
-  private JTextField mPortTextField;
-  private JTextField mSpeedTextField;
-  private JComboBox mPortComboBox;
+  private final JTextField mPortTextField;
+  private final JTextField mSpeedTextField = new JTextField();
+  private final JComboBox mPortComboBox;
+  private final CustomComboBox mCustomComboBox;
 
   /**
    * Create the panel.
@@ -49,14 +54,14 @@ public class Settings extends JPanel {
     JComboBox mSpeedComboBox = new JComboBox();
     mSpeedComboBox.setModel(new DefaultComboBoxModel(Speed.values()));
     mSpeedComboBox.setSelectedIndex(11);
-    setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     
     JButton button = new JButton("");
     button.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         DefaultComboBoxModel model = (DefaultComboBoxModel)mPortComboBox.getModel();
         model.removeAllElements();
-        for (SerialPortInfo serialPortInfo : SerialPortInfo.GetSerialPorts()) {
+        for (SerialPortInfo serialPortInfo : Utils.getSerialPorts()) {
           model.addElement(serialPortInfo);
         }
       }
@@ -64,18 +69,34 @@ public class Settings extends JPanel {
     button.setIcon(new ImageIcon(Settings.class.getResource("/dk/znz/znk/terminal/images/arrow_refresh.png")));
     add(button);
     
-    mPortComboBox = new JComboBox();
+    mPortComboBox = new JComboBox(new DefaultComboBoxModel(Utils.getSerialPorts()));
+    
+    mCustomComboBox = new CustomComboBox();
+    FlowLayout flowLayout = (FlowLayout) mCustomComboBox.getLayout();
+    flowLayout.setVgap(0);
+    flowLayout.setHgap(0);
+    
     add(mPortComboBox);
     add(mPortTextField);
     add(mSpeedComboBox);
 
     
-    mSpeedTextField = new JTextField();
     add(mSpeedTextField);
     mSpeedTextField.setColumns(10);
     add(mDataBitsComboBox);
     add(mStopBitsComboBox);
     add(mParityComboBox);
     add(mFlowControlComboBox);
+    add(mCustomComboBox);
+
+    mSpeedComboBox.addItemListener(new ItemListener() {
+      public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() != ItemEvent.SELECTED)
+          return;
+        Speed speed = (Speed)e.getItem();
+        if(speed != null)
+          mSpeedTextField.setVisible(speed == Speed.SPEED_CUSTOM);
+      }
+    });
   }
 }
