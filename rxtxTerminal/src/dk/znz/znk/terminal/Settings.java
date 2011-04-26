@@ -72,6 +72,9 @@ public class Settings extends JPanel {
     mPortComboBox = new JComboBox(new DefaultComboBoxModel(Utils.getSerialPorts()));
     
     mCustomComboBox = new CustomComboBox();
+    mCustomComboBox.setCustomObject(Speed.SPEED_CUSTOM);
+    mCustomComboBox.getComboBox().setModel(new DefaultComboBoxModel(Speed.values()));
+    
     FlowLayout flowLayout = (FlowLayout) mCustomComboBox.getLayout();
     flowLayout.setVgap(0);
     flowLayout.setHgap(0);
