@@ -10,6 +10,8 @@ public class BluetoothSensorActivity extends Activity {
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    startService(new Intent(this, BluetoothSensorService.class));
+    Intent intent = new Intent(this, BluetoothSensorService.class);
+    intent.putExtra(BluetoothSensorService.REQUEST_CODE, BluetoothSensorService.REQUEST_CODE_START);
+    startService(intent);
   }
 }
