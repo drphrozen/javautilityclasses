@@ -123,4 +123,8 @@ public class PbtReader {
   public int getHardwareRevision() {
     return mByteBuffer.get(59) & 0x07;
   }
+  
+  public ByteBuffer getPayload() {
+    return ByteBuffer.wrap(mPayload, 0, mPacketLength);
+  }
 }

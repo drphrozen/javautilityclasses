@@ -53,16 +53,23 @@ public class Program {
 
         private Runnable createClientHandler(final StreamConnection clientConnection) {
           return new Runnable() {
+            
+            private final byte[] DATA_ACCEPTED = new byte[] {'P','W','A','1'};
+            
             @Override public void run() {
               try {
                 DataInputStream in = clientConnection.openDataInputStream();
                 DataOutputStream out = clientConnection.openDataOutputStream();
                 PbtReader pbtReader = new PbtReader();
+                //TODO: Try the following... It might reconnect for each transmission 
                 while(mIsRunning) {
                   pbtReader.readData(in);
-                  
+                  Thread.sleep(250);
+                  out.write(DATA_ACCEPTED);
                 }
               } catch (IOException e) {
+                e.printStackTrace();
+              } catch (InterruptedException e) {
                 e.printStackTrace();
               } finally {
                 try {
