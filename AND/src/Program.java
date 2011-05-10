@@ -32,7 +32,12 @@ public class Program {
           e.printStackTrace();
           return false;
         }
+        
         System.out.println(data);
+        System.out.println("Battery:     " + message.getBatteryStatus());
+        System.out.println("Serial #:    " + message.getSerialNumber());
+        System.out.println("Measured:    " + message.getMeasurementDate());
+        System.out.println("Transmitted: " + message.getTransmissionDate());
         return true;
       }
     });

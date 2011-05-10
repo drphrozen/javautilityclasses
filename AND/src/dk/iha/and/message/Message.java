@@ -6,24 +6,25 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import dk.iha.and.utils.MacEncoder;
 
 public class Message {
-  private final static int        PACKET_TYPE        = 2;
-  private final static int        HEADER_LENGTH      = 60;
-  private final static int        PAYLOAD_MAX_LENGTH = 14;
+  private final static int PACKET_TYPE        = 2;
+  private final static int HEADER_LENGTH      = 60;
+  private final static int PAYLOAD_MAX_LENGTH = 14;
 
-  private final byte[]            mHeader            = new byte[256];
-  private final ByteBuffer        mByteBuffer        = ByteBuffer.wrap(mHeader);
-  private final ByteBuffer        mPayloadByteBuffer = ByteBuffer.wrap(mHeader, HEADER_LENGTH, PAYLOAD_MAX_LENGTH).asReadOnlyBuffer();
-  private final Charset           mAscii             = Charset.forName("US-ASCII");
-  private final GregorianCalendar mCalendar          = new GregorianCalendar();
-  private Date                    mTransmissionDate;
-  private Date                    mMeasurementDate;
-  private DeviceType              mDeviceType;
-  private int                     mPayloadLength;
+  private final byte[]     mHeader            = new byte[256];
+  private final ByteBuffer mByteBuffer        = ByteBuffer.wrap(mHeader);
+  private final ByteBuffer mPayloadByteBuffer = ByteBuffer.wrap(mHeader, HEADER_LENGTH, PAYLOAD_MAX_LENGTH).asReadOnlyBuffer();
+  private final Charset    mAscii             = Charset.forName("US-ASCII");
+  private DateTime         mTransmissionDate;
+  private DateTime         mMeasurementDate;
+  private DeviceType       mDeviceType;
+  private int              mPayloadLength;
 
   public Message() {
     mByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
@@ -53,22 +54,24 @@ public class Message {
     default:
       throw new IOException("Wrong device type.");
     }
-    mCalendar.set(
+    mMeasurementDate = new DateTime(
         mByteBuffer.getShort(9),
         mByteBuffer.get(11),
         mByteBuffer.get(12),
         mByteBuffer.get(13),
         mByteBuffer.get(14),
-        mByteBuffer.get(15));
-    mMeasurementDate = mCalendar.getTime();
-    mCalendar.set(
+        mByteBuffer.get(15),
+        0,
+        DateTimeZone.UTC);
+    mTransmissionDate = new DateTime(
         mByteBuffer.getShort(16),
         mByteBuffer.get(18),
         mByteBuffer.get(19),
         mByteBuffer.get(20),
         mByteBuffer.get(21),
-        mByteBuffer.get(22));
-    mTransmissionDate = mCalendar.getTime();
+        mByteBuffer.get(22),
+        0,
+        DateTimeZone.UTC);
   }
 
   public short getPacketType() {
@@ -88,11 +91,11 @@ public class Message {
   }
 
   public Date getMeasurementDate() {
-    return mMeasurementDate;
+    return mMeasurementDate.toDate();
   }
 
   public Date getTransmissionDate() {
-    return mTransmissionDate;
+    return mTransmissionDate.toDate();
   }
 
   public String getRemoteBluetoothId(MacEncoder encoder) {
