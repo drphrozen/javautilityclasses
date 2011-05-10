@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/bluecove-2.1.1-SNAPSHOT.jar" sourcepath="lib/bluecove-2.1.1-SNAPSHOT-src.zip"/>
+	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar" sourcepath="lib/joda-time-1.6.2-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
