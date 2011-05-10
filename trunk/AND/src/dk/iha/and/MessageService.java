@@ -17,6 +17,7 @@ import javax.microedition.io.StreamConnectionNotifier;
 import dk.iha.and.message.Message;
 
 public class MessageService {
+  private static final String     PASSWORD            = "39121440";
   private static final String     SERIAL_PORT_PROFILE = new UUID("1101", true).toString();
 
   private volatile boolean        mIsRunning;
@@ -39,10 +40,9 @@ public class MessageService {
 
     mServerThread = new Thread(new Runnable() {
       @Override public void run() {
-        System.out.println("Server running..");
+        System.out.println("Server running, waiting for clients..");
         try {
           while (mIsRunning) {
-            System.out.println("Waiting for client..");
             executorService.execute(createClientHandler(serialConnection.acceptAndOpen()));
           }
         } catch (IOException e) {
@@ -62,10 +62,9 @@ public class MessageService {
       private Runnable createClientHandler(final StreamConnection clientConnection) {
         return new Runnable() {
 
-          private final byte[] DATA_REFUSED  = new byte[] { 'P', 'W', 'A', '0' };
-          private final byte[] DATA_ACCEPTED = new byte[] { 'P', 'W', 'A', '1' };
-
-//          private final byte[]           DATA_ACCEPTED_AND_CONFIGURE = new byte[] { 'P', 'W', 'A', '2' };
+          private final byte[] DATA_REFUSED                = new byte[] { 'P', 'W', 'A', '0' };
+          private final byte[] DATA_ACCEPTED               = new byte[] { 'P', 'W', 'A', '1' };
+          private final byte[] DATA_ACCEPTED_AND_CONFIGURE = new byte[] { 'P', 'W', 'A', '2' };
 
           @Override public void run() {
             System.out.println("Client connected..");
@@ -80,11 +79,20 @@ public class MessageService {
                 result = mOnPbtDataListener.onMessage(pbtReader);
               } catch (Exception ex) {
                 result = false;
+                ex.printStackTrace();
               }
               long sleepFor = 250 - (System.currentTimeMillis() - start);
               if (sleepFor > 0)
                 Thread.sleep(sleepFor);
               out.write(result ? DATA_ACCEPTED : DATA_REFUSED);
+//              byte[] tmp = new byte[256];
+//              in.read(tmp);
+//              if (tmp[0] == 'P' && tmp[1] == 'W' && tmp[2] == 'R' && tmp[3] == 'Q' && tmp[4] == 'C' && tmp[5] == 'F') {
+//                out.write(Configuration.createConfiguration("PWAccessP", true));
+//                in.read(tmp);
+//                if(tmp[3] != '1')
+//                  throw new IOException("Configuration failed");
+//              }
             } catch (IOException e) {
               e.printStackTrace();
             } catch (InterruptedException e) {
