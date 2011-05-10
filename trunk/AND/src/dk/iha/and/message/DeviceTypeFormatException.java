@@ -1,4 +1,4 @@
-package dk.iha.and;
+package dk.iha.and.message;
 
 public class DeviceTypeFormatException extends IllegalArgumentException {
 
@@ -18,5 +18,5 @@ public class DeviceTypeFormatException extends IllegalArgumentException {
 
   public DeviceTypeFormatException(Throwable cause) {
     super(cause);
-  }  
+  }
 }
