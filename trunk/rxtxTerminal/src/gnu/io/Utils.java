@@ -1,13 +1,15 @@
 package gnu.io;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Vector;
 
 public class Utils {
 
-  public static SerialPortInfo[] getSerialPorts()
-  {
+  public static SerialPortInfo[] getSerialPorts() {
     SerialPortInfoFactory factory = SerialPortInfoFactory.getInstance();
     List<CommPortIdentifier> identifiers = Utils.getPorts(PortType.PORT_SERIAL);
     ArrayList<SerialPortInfo> serialPortInfos = new ArrayList<SerialPortInfo>();
@@ -16,7 +18,7 @@ public class Utils {
     }
     return serialPortInfos.toArray(new SerialPortInfo[0]);
   }
-  
+
   public static List<CommPortIdentifier> getPorts(PortType type) {
     @SuppressWarnings("unchecked") Enumeration<CommPortIdentifier> commPortIdentifiers = CommPortIdentifier.getPortIdentifiers();
     ArrayList<CommPortIdentifier> serialPorts = new ArrayList<CommPortIdentifier>();
@@ -36,6 +38,22 @@ public class Utils {
     }
     return serialPorts;
   }
+
+  public final static List<String> DefaultSpeeds = Collections.unmodifiableList(Arrays.asList(
+                                                     "110",
+                                                     "330",
+                                                     "600",
+                                                     "1200",
+                                                     "2400",
+                                                     "4800",
+                                                     "9600",
+                                                     "14400",
+                                                     "19200",
+                                                     "38400",
+                                                     "57600",
+                                                     "115200",
+                                                     "128000",
+                                                     "256000"));
 
   public enum PortType {
     PORT_SERIAL(1),
