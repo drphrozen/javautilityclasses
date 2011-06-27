@@ -1,5 +1,5 @@
 package dk.znz.sgs2converter;
-class StopWatch {
+public class StopWatch {
   private long mStartTime   = 0;
   private long mStopTime    = 0;
   private long mElapsedTime = 0;
