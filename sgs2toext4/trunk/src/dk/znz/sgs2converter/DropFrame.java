@@ -31,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class DropFrame extends JFrame implements DropTargetListener, WindowListener {
 
@@ -135,6 +136,7 @@ public class DropFrame extends JFrame implements DropTargetListener, WindowListe
     setContentPane(mcontentPane);
 
     mTxtpnDropAnSamsung = new JTextArea();
+    mTxtpnDropAnSamsung.setFont(new Font("Courier New", Font.PLAIN, 11));
     mTxtpnDropAnSamsung.setLineWrap(true);
     new DropTarget(mTxtpnDropAnSamsung, this);
     mTxtpnDropAnSamsung.setEditable(false);
