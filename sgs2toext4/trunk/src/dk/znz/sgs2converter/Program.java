@@ -17,6 +17,7 @@ public class Program {
       System.out.println(
           "Usage java -jar sgs2converter.jar \"inputfile\" \"outputfile\"\n" +
           "fx: java -jar sgs2converter.jar \"factoryfs.img\" \"factoryfs.ext4.img\"");
+      return;
     }
     File inputFilename = new File(args[0]);
     File outputFilename = new File(args[1]);
