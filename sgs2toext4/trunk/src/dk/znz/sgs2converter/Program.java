@@ -13,6 +13,11 @@ public class Program {
    * @throws IOException
    */
   public static void main(String[] args) throws IOException {
+    if(args.length != 2) {
+      System.out.println(
+          "Usage java -jar sgs2converter.jar \"inputfile\" \"outputfile\"\n" +
+          "fx: java -jar sgs2converter.jar \"factoryfs.img\" \"factoryfs.ext4.img\"");
+    }
     File inputFilename = new File(args[0]);
     File outputFilename = new File(args[1]);
 
