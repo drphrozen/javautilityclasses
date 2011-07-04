@@ -23,31 +23,34 @@ public class Sgs2Converter {
   }
   
   public void convert() throws IOException {
-    
-    for (int i = 0; i < 7; i++) {
-      mIn.readInt();
-    }
-
-    while (true) {
-      try {
-        mBuffer[0] = mIn.readInt();
-      } catch (EOFException e) {
-        return;
+    try { 
+      for (int i = 0; i < 7; i++) {
+        mIn.readInt();
       }
-      switch (mBuffer[0]) {
-      case 0xC1CA0000:
-        mBuffer[1] = mIn.readInt();
-        mBuffer[2] = mIn.readInt();
-        copyField();
-        break;
-      case 0xC3CA0000:
-        mBuffer[1] = mIn.readInt();
-        mBuffer[2] = mIn.readInt();
-        writeZeros();
-        break;
-      default:
-        throw new IOException("Invalid header");
+  
+      while (true) {
+        try {
+          mBuffer[0] = mIn.readInt();
+        } catch (EOFException e) {
+          return;
+        }
+        switch (mBuffer[0]) {
+        case 0xC1CA0000:
+          mBuffer[1] = mIn.readInt();
+          mBuffer[2] = mIn.readInt();
+          copyField();
+          break;
+        case 0xC3CA0000:
+          mBuffer[1] = mIn.readInt();
+          mBuffer[2] = mIn.readInt();
+          writeZeros();
+          break;
+        default:
+          throw new IOException("Invalid header");
+        }
       }
+    } finally {
+      mOut.close();
     }
   }
   
@@ -63,7 +66,7 @@ public class Sgs2Converter {
   
   private void writeZeros() throws IOException {
     if (mBuffer[1] != 0) {
-      long k = (Integer.reverseBytes(mBuffer[1]) & UINT32_MASK) * 1024 - 1;
+      long k = (Integer.reverseBytes(mBuffer[1]) & UINT32_MASK) * 1024;
       mBuffer[2] = 0;
       for (int i = 0; i < k; i++) {
         mOut.writeInt(0);

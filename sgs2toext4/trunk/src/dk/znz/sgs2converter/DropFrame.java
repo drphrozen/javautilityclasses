@@ -140,7 +140,7 @@ public class DropFrame extends JFrame implements DropTargetListener, WindowListe
     mTxtpnDropAnSamsung.setLineWrap(true);
     new DropTarget(mTxtpnDropAnSamsung, this);
     mTxtpnDropAnSamsung.setEditable(false);
-    mTxtpnDropAnSamsung.setText("drop an samsung \".img\" file here\r\noutput will be <inputname>.ext4.img\r\n");
+    mTxtpnDropAnSamsung.setText("drop a samsung \".img\" file here\r\noutput will be <inputname>.ext4.img\r\n");
     mscrollPane = new JScrollPane(mTxtpnDropAnSamsung);
     mcontentPane.add(mscrollPane, BorderLayout.CENTER);
 
